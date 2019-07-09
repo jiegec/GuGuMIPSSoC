@@ -1,0 +1,9 @@
+.metadata
+.sdk
+SDK.log
+*.hdf
+*.a
+*.o
+*.bit
+webtalk
+*.prefs
