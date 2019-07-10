@@ -1,3 +1,5 @@
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
+
 # clock
 set_property PACKAGE_PIN AC19 [get_ports clk]
 set_property IOSTANDARD LVCMOS33 [get_ports clk]
