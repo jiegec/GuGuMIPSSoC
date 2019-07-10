@@ -7,5 +7,7 @@
 # of Vivado)
 ################################################################################
 create_clock -name clk -period 10 [get_ports clk]
+create_clock -name mii_rx_clk -period 10 [get_ports mii_rx_clk]
+create_clock -name mii_tx_clk -period 10 [get_ports mii_tx_clk]
 
 ################################################################################
