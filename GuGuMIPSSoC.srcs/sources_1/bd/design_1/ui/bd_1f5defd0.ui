@@ -29,77 +29,80 @@ preplace portBus utmi_data_0 -pg 1 -y 360 -defaultsOSRD
 preplace portBus utmi_xcvrsel_0 -pg 1 -y 420 -defaultsOSRD
 preplace portBus utmi_opmode_0 -pg 1 -y 400 -defaultsOSRD
 preplace portBus utmi_linestate_0 -pg 1 -y 520 -defaultsOSRD
-preplace inst mig_7series_0 -pg 1 -lvl 5 -y 840 -defaultsOSRD
+preplace inst mig_7series_0 -pg 1 -lvl 5 -y 980 -defaultsOSRD
 preplace inst microblaze_0_axi_periph -pg 1 -lvl 4 -y 390 -defaultsOSRD
 preplace inst axi_timer_0 -pg 1 -lvl 5 -y 190 -defaultsOSRD
 preplace inst microblaze_0_xlconcat -pg 1 -lvl 1 -y 360 -defaultsOSRD
-preplace inst axi_ethernetlite_0 -pg 1 -lvl 5 -y 1000 -defaultsOSRD
+preplace inst axi_ethernetlite_0 -pg 1 -lvl 5 -y 1140 -defaultsOSRD
 preplace inst mdm_1 -pg 1 -lvl 2 -y 350 -defaultsOSRD
 preplace inst microblaze_0_axi_intc -pg 1 -lvl 2 -y 110 -defaultsOSRD
-preplace inst axi_uartlite_0 -pg 1 -lvl 5 -y 680 -defaultsOSRD
+preplace inst system_ila_0 -pg 1 -lvl 5 -y 680 -defaultsOSRD
+preplace inst axi_uartlite_0 -pg 1 -lvl 5 -y 820 -defaultsOSRD
 preplace inst microblaze_0 -pg 1 -lvl 3 -y 130 -defaultsOSRD
+preplace inst rst_utmi_clock_0_60M -pg 1 -lvl 4 -y -20 -defaultsOSRD
 preplace inst rst_clk_wiz_1_100M -pg 1 -lvl 1 -y 550 -defaultsOSRD
 preplace inst usbh_host_0 -pg 1 -lvl 5 -y 450 -defaultsOSRD
 preplace inst clk_wiz_1 -pg 1 -lvl 4 -y 810 -defaultsOSRD
 preplace inst microblaze_0_local_memory -pg 1 -lvl 4 -y 1000 -defaultsOSRD
 preplace netloc usbh_host_0_utmi_chrgvbus 1 5 1 NJ
-preplace netloc mig_7series_0_mmcm_locked 1 0 6 70 1130 NJ 1130 NJ 1130 NJ 1130 NJ 1130 2330
-preplace netloc microblaze_0_axi_periph_M04_AXI 1 4 1 1850
-preplace netloc axi_ethernetlite_0_MDIO 1 5 1 NJ
-preplace netloc microblaze_0_mdm_axi 1 1 4 590 430 910J 10 NJ 10 1840
-preplace netloc mig_7series_0_DDR3 1 5 1 2370J
-preplace netloc utmi_sessend_0_1 1 0 5 -50J 890 NJ 890 NJ 890 NJ 890 1950J
+preplace netloc mig_7series_0_mmcm_locked 1 0 6 40 1240 NJ 1240 NJ 1240 NJ 1240 NJ 1240 2680
+preplace netloc microblaze_0_axi_periph_M04_AXI 1 4 1 2070
+preplace netloc axi_ethernetlite_0_MDIO 1 5 1 2740J
+preplace netloc microblaze_0_mdm_axi 1 1 4 480 730 NJ 730 NJ 730 2050
+preplace netloc mig_7series_0_DDR3 1 5 1 2740J
+preplace netloc utmi_sessend_0_1 1 0 5 -90J 670 NJ 670 NJ 670 1420J 900 2200J
 preplace netloc usbh_host_0_utmi_idpullup 1 5 1 NJ
-preplace netloc axi_uartlite_0_interrupt 1 0 6 30 1110 NJ 1110 NJ 1110 NJ 1110 NJ 1110 2340
-preplace netloc microblaze_0_intr 1 1 1 500
-preplace netloc utmi_rxactive_0_1 1 0 5 -20J 240 530J 250 920J 270 1460J 40 1930J
-preplace netloc microblaze_0_Clk 1 0 6 10 170 560 450 950 290 1520 1080 1920 1080 2310
-preplace netloc microblaze_0_axi_periph_M06_AXI 1 4 1 1860
-preplace netloc microblaze_0_axi_periph_M03_AXI 1 4 1 1890
-preplace netloc microblaze_0_interrupt 1 2 1 900
-preplace netloc microblaze_0_intc_axi 1 1 4 590 240 NJ 240 1450J 60 1830
+preplace netloc axi_uartlite_0_interrupt 1 0 6 -10 1260 NJ 1260 NJ 1260 NJ 1260 NJ 1260 2700
+preplace netloc microblaze_0_intr 1 1 1 420
+preplace netloc utmi_rxactive_0_1 1 0 5 -30J 660 NJ 660 NJ 660 1380J 1080 2160J
+preplace netloc microblaze_0_Clk 1 0 6 20 220 440 0 850 20 1400 1170 2170 1230 2690
+preplace netloc microblaze_0_axi_periph_M06_AXI 1 4 1 2260
+preplace netloc microblaze_0_axi_periph_M03_AXI 1 4 1 2210
+preplace netloc microblaze_0_interrupt 1 2 1 840
+preplace netloc microblaze_0_intc_axi 1 1 4 470 720 NJ 720 NJ 720 2060
 preplace netloc usbh_host_0_utmi_dmpulldown 1 5 1 NJ
-preplace netloc resetn_0_1 1 0 4 -60 180 570J 270 890J 280 1490J
+preplace netloc resetn_0_1 1 0 4 -20 230 NJ 230 850J 250 1460J
 preplace netloc microblaze_0_M_AXI_DC 1 3 1 N
-preplace netloc microblaze_0_ilmb_1 1 3 1 1480
-preplace netloc utmi_iddig_0_1 1 0 5 -40J 900 NJ 900 NJ 900 NJ 900 1940J
-preplace netloc utmi_hostdisc_0_1 1 0 5 -10J 230 NJ 230 940J 250 1440J 30 1950J
+preplace netloc microblaze_0_ilmb_1 1 3 1 1430
+preplace netloc utmi_iddig_0_1 1 0 5 -70J 910 NJ 910 NJ 910 NJ 910 2190J
+preplace netloc utmi_hostdisc_0_1 1 0 5 -60J 1120 NJ 1120 NJ 1120 NJ 1120 2090J
 preplace netloc usbh_host_0_utmi_txvalid 1 5 1 NJ
-preplace netloc mdm_1_Interrupt 1 0 3 60 220 490J 440 900
-preplace netloc microblaze_0_axi_periph_M05_AXI 1 4 1 1850
+preplace netloc mdm_1_Interrupt 1 0 3 30 250 NJ 250 840
+preplace netloc microblaze_0_axi_periph_M05_AXI 1 4 1 2140
 preplace netloc microblaze_0_axi_dp 1 3 1 N
 preplace netloc usbh_host_0_utmi_dischrgvbus 1 5 1 NJ
-preplace netloc utmi_vbusvalid_0_1 1 0 5 -60J 1150 NJ 1150 NJ 1150 NJ 1150 1970J
-preplace netloc utmi_linestate_0_1 1 0 5 -30J 910 NJ 910 NJ 910 NJ 910 1930J
+preplace netloc utmi_vbusvalid_0_1 1 0 5 -80J 680 NJ 680 NJ 680 1360J 1110 2240J
+preplace netloc utmi_linestate_0_1 1 0 5 -100J 1150 NJ 1150 NJ 1150 NJ 1150 2250J
 preplace netloc usbh_host_0_utmi_opmode 1 5 1 NJ
-preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 1 3 NJ 530 NJ 530 1450
+preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 1 3 NJ 530 NJ 530 1410
 preplace netloc microblaze_0_M_AXI_IC 1 3 1 N
 preplace netloc microblaze_0_M_AXI_IP 1 3 1 N
 preplace netloc usbh_host_0_utmi_suspend_n 1 5 1 NJ
 preplace netloc usbh_host_0_utmi_termsel 1 5 1 NJ
-preplace netloc clk_wiz_1_locked 1 4 1 1960
-preplace netloc clk_wiz_1_clk_out1 1 4 1 1840
+preplace netloc clk_wiz_1_locked 1 4 1 2110
+preplace netloc clk_wiz_1_clk_out1 1 4 1 2130
 preplace netloc clk_in1_0_1 1 0 4 NJ 820 NJ 820 NJ 820 NJ
-preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 1 4 520 580 NJ 580 1530 1090 1910
-preplace netloc rst_clk_wiz_1_100M_mb_reset 1 1 2 540 470 960J
-preplace netloc axi_uartlite_0_UART 1 5 1 2370J
-preplace netloc usbh_host_0_intr 1 0 6 40 1140 NJ 1140 NJ 1140 NJ 1140 NJ 1140 2360
-preplace netloc axi_ethernetlite_0_ip2intc_irpt 1 0 6 50 1120 NJ 1120 NJ 1120 NJ 1120 NJ 1120 2320
-preplace netloc clk_wiz_1_clk_out2 1 4 1 1830
-preplace netloc microblaze_0_axi_periph_M02_AXI 1 4 1 1900
-preplace netloc microblaze_0_dlmb_1 1 3 1 1510
-preplace netloc aclk_0_1 1 0 5 -30J 250 480J 500 NJ 500 1500J 720 1870J
+preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 1 4 450 260 NJ 260 1440 1160 2180
+preplace netloc rst_clk_wiz_1_100M_mb_reset 1 1 2 460 220 870J
+preplace netloc axi_uartlite_0_UART 1 5 1 2730J
+preplace netloc usbh_host_0_intr 1 0 6 10 1270 NJ 1270 NJ 1270 NJ 1270 NJ 1270 2720
+preplace netloc axi_ethernetlite_0_ip2intc_irpt 1 0 6 30 1220 NJ 1220 NJ 1220 NJ 1220 NJ 1220 2670
+preplace netloc clk_wiz_1_clk_out2 1 4 1 2120
+preplace netloc microblaze_0_axi_periph_M02_AXI 1 4 1 2220
+preplace netloc microblaze_0_dlmb_1 1 3 1 1450
+preplace netloc aclk_0_1 1 0 5 -100J 240 NJ 240 NJ 240 1370J 890 2100J
 preplace netloc Net 1 5 1 NJ
 preplace netloc usbh_host_0_utmi_xcvrsel 1 5 1 NJ
 preplace netloc usbh_host_0_utmi_dppulldown 1 5 1 NJ
-preplace netloc axi_ethernetlite_0_MII 1 5 1 NJ
-preplace netloc microblaze_0_debug 1 2 1 930
-preplace netloc utmi_rxvalid_0_1 1 0 5 -50J 200 580J 220 890J 20 NJ 20 1970J
-preplace netloc utmi_txready_0_1 1 0 5 -40J 210 550J 260 NJ 260 1470J 50 1960J
-preplace netloc mdm_1_debug_sys_rst 1 0 3 20 190 510J 460 890
-preplace netloc utmi_rxerror_0_1 1 0 5 0J 260 470J 540 NJ 540 1470J 730 1880J
-preplace netloc axi_timer_0_interrupt 1 0 6 60 1100 NJ 1100 NJ 1100 NJ 1100 NJ 1100 2350
-levelinfo -pg 1 -80 290 740 1200 1680 2150 2390 -top 0 -bot 1160
+preplace netloc axi_ethernetlite_0_MII 1 5 1 2730J
+preplace netloc microblaze_0_debug 1 2 1 860
+preplace netloc rst_utmi_clock_0_60M_peripheral_aresetn 1 3 2 1470 1090 2080
+preplace netloc utmi_rxvalid_0_1 1 0 5 -40J 1140 NJ 1140 NJ 1140 NJ 1140 2070J
+preplace netloc utmi_txready_0_1 1 0 5 -50J 260 430J 270 NJ 270 1390J 1100 2150J
+preplace netloc mdm_1_debug_sys_rst 1 0 3 50 650 NJ 650 840
+preplace netloc utmi_rxerror_0_1 1 0 5 -50J 1130 NJ 1130 NJ 1130 NJ 1130 2230J
+preplace netloc axi_timer_0_interrupt 1 0 6 0 1250 NJ 1250 NJ 1250 NJ 1250 NJ 1250 2710
+levelinfo -pg 1 -120 240 687 1120 1870 2509 2760 -top -120 -bot 2030
 "
 }
 {

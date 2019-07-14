@@ -49,12 +49,33 @@
 #include "platform.h"
 #include "xil_printf.h"
 
+volatile u32 *USB_CTRL = (u32 *)0x40000000;
+volatile u32 *USB_STATUS = (u32 *)0x40000004;
+volatile u32 *USB_IRQ_ACK = (u32 *)0x40000008;
+volatile u32 *USB_IRQ_STS = (u32 *)0x4000000c;
+volatile u32 *USB_IRQ_MASK = (u32 *)0x40000010;
+volatile u32 *USB_XFER_DATA = (u32 *)0x40000014;
+volatile u32 *USB_XFER_TOKEN = (u32 *)0x40000018;
+volatile u32 *USB_RX_STAT = (u32 *)0x4000001c;
+volatile u32 *USB_WR_DATA = (u32 *)0x40000020;
+volatile u32 *USB_RD_DATA = (u32 *)0x40000020;
 
 int main()
 {
     init_platform();
 
-    print("Hello World\n\r");
+    Xil_DCacheDisable();
+
+    print("Hello World USB\r\n");
+
+    usleep(1000000);
+
+    print("Read Ctrl\r\n");
+    //xil_printf("ctrl %08x\r\n", *USB_CTRL);
+    print("Read status\r\n");
+    xil_printf("status %08x\r\n", *USB_STATUS);
+    print("Read irq\r\n");
+    //xil_printf("irq %08x\r\n", *USB_IRQ_STS);
 
     cleanup_platform();
     return 0;
