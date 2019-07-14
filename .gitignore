@@ -57,7 +57,7 @@
 #TCL - files
 !*.tcl
 #Journal - files
-!*.jou
+#!*.jou
 #Reports
 !*.rpt
 !*.txt

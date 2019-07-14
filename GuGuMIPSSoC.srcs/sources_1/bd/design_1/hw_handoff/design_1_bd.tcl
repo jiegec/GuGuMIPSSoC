@@ -37,6 +37,13 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 # To test this script, run the following commands from Vivado Tcl console:
 # source design_1_script.tcl
 
+
+# The design that will be created by this Tcl script contains the following 
+# module references:
+# utmi_wrapper
+
+# Please add the sources of those modules before sourcing this Tcl script.
+
 # If there is no project opened, this script will create a
 # project, but make sure you do not have an existing project
 # <./myproj/project_1.xpr> in the current working folder.
@@ -397,6 +404,28 @@ proc create_root_design { parentCell } {
    CONFIG.ASSOCIATED_RESET {reset} \
  ] $clk
   set resetn [ create_bd_port -dir I -type rst resetn ]
+  set utmi_chrgvbus_0 [ create_bd_port -dir O utmi_chrgvbus_0 ]
+  set utmi_clock_0 [ create_bd_port -dir I -type clk utmi_clock_0 ]
+  set utmi_data_0 [ create_bd_port -dir IO -from 7 -to 0 utmi_data_0 ]
+  set utmi_dischrgvbus_0 [ create_bd_port -dir O utmi_dischrgvbus_0 ]
+  set utmi_dmpulldown_0 [ create_bd_port -dir O utmi_dmpulldown_0 ]
+  set utmi_dppulldown_0 [ create_bd_port -dir O utmi_dppulldown_0 ]
+  set utmi_hostdisc_0 [ create_bd_port -dir I utmi_hostdisc_0 ]
+  set utmi_iddig_0 [ create_bd_port -dir I utmi_iddig_0 ]
+  set utmi_idpullup_0 [ create_bd_port -dir O utmi_idpullup_0 ]
+  set utmi_linestate_0 [ create_bd_port -dir I -from 1 -to 0 utmi_linestate_0 ]
+  set utmi_opmode_0 [ create_bd_port -dir O -from 1 -to 0 utmi_opmode_0 ]
+  set utmi_reset_0 [ create_bd_port -dir O -type rst utmi_reset_0 ]
+  set utmi_rxactive_0 [ create_bd_port -dir I utmi_rxactive_0 ]
+  set utmi_rxerror_0 [ create_bd_port -dir I utmi_rxerror_0 ]
+  set utmi_rxvalid_0 [ create_bd_port -dir I utmi_rxvalid_0 ]
+  set utmi_sessend_0 [ create_bd_port -dir I utmi_sessend_0 ]
+  set utmi_suspend_n_0 [ create_bd_port -dir O utmi_suspend_n_0 ]
+  set utmi_termsel_0 [ create_bd_port -dir O utmi_termsel_0 ]
+  set utmi_txready_0 [ create_bd_port -dir I utmi_txready_0 ]
+  set utmi_txvalid_0 [ create_bd_port -dir O utmi_txvalid_0 ]
+  set utmi_vbusvalid_0 [ create_bd_port -dir I utmi_vbusvalid_0 ]
+  set utmi_xcvrsel_0 [ create_bd_port -dir O -from 1 -to 0 utmi_xcvrsel_0 ]
 
   # Create instance: axi_ethernetlite_0, and set properties
   set axi_ethernetlite_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_ethernetlite:3.0 axi_ethernetlite_0 ]
@@ -404,11 +433,14 @@ proc create_root_design { parentCell } {
   # Create instance: axi_timer_0, and set properties
   set axi_timer_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_timer:2.0 axi_timer_0 ]
   set_property -dict [ list \
-   CONFIG.enable_timer2 {0} \
+   CONFIG.enable_timer2 {1} \
  ] $axi_timer_0
 
   # Create instance: axi_uartlite_0, and set properties
   set axi_uartlite_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_uartlite:2.0 axi_uartlite_0 ]
+
+  # Create instance: axi_usb2_device_0, and set properties
+  set axi_usb2_device_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_usb2_device:5.0 axi_usb2_device_0 ]
 
   # Create instance: clk_wiz_1, and set properties
   set clk_wiz_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_1 ]
@@ -478,7 +510,7 @@ proc create_root_design { parentCell } {
   # Create instance: microblaze_0_axi_periph, and set properties
   set microblaze_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_periph ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {6} \
+   CONFIG.NUM_MI {7} \
    CONFIG.NUM_SI {4} \
  ] $microblaze_0_axi_periph
 
@@ -510,6 +542,17 @@ proc create_root_design { parentCell } {
   # Create instance: rst_clk_wiz_1_100M, and set properties
   set rst_clk_wiz_1_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_clk_wiz_1_100M ]
 
+  # Create instance: utmi_wrapper_0, and set properties
+  set block_name utmi_wrapper
+  set block_cell_name utmi_wrapper_0
+  if { [catch {set utmi_wrapper_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $utmi_wrapper_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create interface connections
   connect_bd_intf_net -intf_net axi_ethernetlite_0_MDIO [get_bd_intf_ports mdio] [get_bd_intf_pins axi_ethernetlite_0/MDIO]
   connect_bd_intf_net -intf_net axi_ethernetlite_0_MII [get_bd_intf_ports mii] [get_bd_intf_pins axi_ethernetlite_0/MII]
@@ -522,6 +565,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M03_AXI [get_bd_intf_pins axi_uartlite_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M03_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M04_AXI [get_bd_intf_pins axi_timer_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M04_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M05_AXI [get_bd_intf_pins axi_ethernetlite_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M05_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M06_AXI [get_bd_intf_pins axi_usb2_device_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M06_AXI]
   connect_bd_intf_net -intf_net microblaze_0_debug [get_bd_intf_pins mdm_1/MBDEBUG_0] [get_bd_intf_pins microblaze_0/DEBUG]
   connect_bd_intf_net -intf_net microblaze_0_dlmb_1 [get_bd_intf_pins microblaze_0/DLMB] [get_bd_intf_pins microblaze_0_local_memory/DLMB]
   connect_bd_intf_net -intf_net microblaze_0_ilmb_1 [get_bd_intf_pins microblaze_0/ILMB] [get_bd_intf_pins microblaze_0_local_memory/ILMB]
@@ -531,22 +575,52 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net mig_7series_0_DDR3 [get_bd_intf_ports DDR3_0] [get_bd_intf_pins mig_7series_0/DDR3]
 
   # Create port connections
+  connect_bd_net -net Net [get_bd_ports utmi_data_0] [get_bd_pins utmi_wrapper_0/utmi_data]
   connect_bd_net -net axi_ethernetlite_0_ip2intc_irpt [get_bd_pins axi_ethernetlite_0/ip2intc_irpt] [get_bd_pins microblaze_0_xlconcat/In3]
   connect_bd_net -net axi_timer_0_interrupt [get_bd_pins axi_timer_0/interrupt] [get_bd_pins microblaze_0_xlconcat/In2]
   connect_bd_net -net axi_uartlite_0_interrupt [get_bd_pins axi_uartlite_0/interrupt] [get_bd_pins microblaze_0_xlconcat/In1]
+  connect_bd_net -net axi_usb2_device_0_ulpi_data_o [get_bd_pins axi_usb2_device_0/ulpi_data_o] [get_bd_pins utmi_wrapper_0/ulpi_data_i]
+  connect_bd_net -net axi_usb2_device_0_ulpi_data_t [get_bd_pins axi_usb2_device_0/ulpi_data_t] [get_bd_pins utmi_wrapper_0/ulpi_data_t]
+  connect_bd_net -net axi_usb2_device_0_ulpi_reset [get_bd_pins axi_usb2_device_0/ulpi_reset] [get_bd_pins utmi_wrapper_0/ulpi_reset]
+  connect_bd_net -net axi_usb2_device_0_ulpi_stop [get_bd_pins axi_usb2_device_0/ulpi_stop] [get_bd_pins utmi_wrapper_0/ulpi_stop]
   connect_bd_net -net clk_in1_0_1 [get_bd_ports clk] [get_bd_pins clk_wiz_1/clk_in1]
   connect_bd_net -net clk_wiz_1_clk_out1 [get_bd_pins clk_wiz_1/clk_out1] [get_bd_pins mig_7series_0/sys_clk_i]
   connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_pins clk_wiz_1/clk_out2] [get_bd_pins mig_7series_0/clk_ref_i]
   connect_bd_net -net clk_wiz_1_locked [get_bd_pins clk_wiz_1/locked] [get_bd_pins mig_7series_0/sys_rst]
   connect_bd_net -net mdm_1_Interrupt [get_bd_pins mdm_1/Interrupt] [get_bd_pins microblaze_0_xlconcat/In0]
   connect_bd_net -net mdm_1_debug_sys_rst [get_bd_pins mdm_1/Debug_SYS_Rst] [get_bd_pins rst_clk_wiz_1_100M/mb_debug_sys_rst]
-  connect_bd_net -net microblaze_0_Clk [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_timer_0/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_intc/processor_clk] [get_bd_pins microblaze_0_axi_intc/s_axi_aclk] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/M01_ACLK] [get_bd_pins microblaze_0_axi_periph/M02_ACLK] [get_bd_pins microblaze_0_axi_periph/M03_ACLK] [get_bd_pins microblaze_0_axi_periph/M04_ACLK] [get_bd_pins microblaze_0_axi_periph/M05_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_axi_periph/S01_ACLK] [get_bd_pins microblaze_0_axi_periph/S02_ACLK] [get_bd_pins microblaze_0_axi_periph/S03_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins mig_7series_0/ui_clk] [get_bd_pins rst_clk_wiz_1_100M/slowest_sync_clk]
+  connect_bd_net -net microblaze_0_Clk [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_timer_0/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins axi_usb2_device_0/s_axi_aclk] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_intc/processor_clk] [get_bd_pins microblaze_0_axi_intc/s_axi_aclk] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/M01_ACLK] [get_bd_pins microblaze_0_axi_periph/M02_ACLK] [get_bd_pins microblaze_0_axi_periph/M03_ACLK] [get_bd_pins microblaze_0_axi_periph/M04_ACLK] [get_bd_pins microblaze_0_axi_periph/M05_ACLK] [get_bd_pins microblaze_0_axi_periph/M06_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_axi_periph/S01_ACLK] [get_bd_pins microblaze_0_axi_periph/S02_ACLK] [get_bd_pins microblaze_0_axi_periph/S03_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins mig_7series_0/ui_clk] [get_bd_pins rst_clk_wiz_1_100M/slowest_sync_clk]
   connect_bd_net -net microblaze_0_intr [get_bd_pins microblaze_0_axi_intc/intr] [get_bd_pins microblaze_0_xlconcat/dout]
   connect_bd_net -net mig_7series_0_mmcm_locked [get_bd_pins mig_7series_0/mmcm_locked] [get_bd_pins rst_clk_wiz_1_100M/dcm_locked]
   connect_bd_net -net resetn_0_1 [get_bd_ports resetn] [get_bd_pins clk_wiz_1/resetn] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
   connect_bd_net -net rst_clk_wiz_1_100M_bus_struct_reset [get_bd_pins microblaze_0_local_memory/SYS_Rst] [get_bd_pins rst_clk_wiz_1_100M/bus_struct_reset]
   connect_bd_net -net rst_clk_wiz_1_100M_mb_reset [get_bd_pins microblaze_0/Reset] [get_bd_pins microblaze_0_axi_intc/processor_rst] [get_bd_pins rst_clk_wiz_1_100M/mb_reset]
-  connect_bd_net -net rst_clk_wiz_1_100M_peripheral_aresetn [get_bd_pins axi_ethernetlite_0/s_axi_aresetn] [get_bd_pins axi_timer_0/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins mdm_1/S_AXI_ARESETN] [get_bd_pins microblaze_0_axi_intc/s_axi_aresetn] [get_bd_pins microblaze_0_axi_periph/ARESETN] [get_bd_pins microblaze_0_axi_periph/M00_ARESETN] [get_bd_pins microblaze_0_axi_periph/M01_ARESETN] [get_bd_pins microblaze_0_axi_periph/M02_ARESETN] [get_bd_pins microblaze_0_axi_periph/M03_ARESETN] [get_bd_pins microblaze_0_axi_periph/M04_ARESETN] [get_bd_pins microblaze_0_axi_periph/M05_ARESETN] [get_bd_pins microblaze_0_axi_periph/S00_ARESETN] [get_bd_pins microblaze_0_axi_periph/S01_ARESETN] [get_bd_pins microblaze_0_axi_periph/S02_ARESETN] [get_bd_pins microblaze_0_axi_periph/S03_ARESETN] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_clk_wiz_1_100M/peripheral_aresetn]
+  connect_bd_net -net rst_clk_wiz_1_100M_peripheral_aresetn [get_bd_pins axi_ethernetlite_0/s_axi_aresetn] [get_bd_pins axi_timer_0/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins axi_usb2_device_0/s_axi_aresetn] [get_bd_pins mdm_1/S_AXI_ARESETN] [get_bd_pins microblaze_0_axi_intc/s_axi_aresetn] [get_bd_pins microblaze_0_axi_periph/ARESETN] [get_bd_pins microblaze_0_axi_periph/M00_ARESETN] [get_bd_pins microblaze_0_axi_periph/M01_ARESETN] [get_bd_pins microblaze_0_axi_periph/M02_ARESETN] [get_bd_pins microblaze_0_axi_periph/M03_ARESETN] [get_bd_pins microblaze_0_axi_periph/M04_ARESETN] [get_bd_pins microblaze_0_axi_periph/M05_ARESETN] [get_bd_pins microblaze_0_axi_periph/M06_ARESETN] [get_bd_pins microblaze_0_axi_periph/S00_ARESETN] [get_bd_pins microblaze_0_axi_periph/S01_ARESETN] [get_bd_pins microblaze_0_axi_periph/S02_ARESETN] [get_bd_pins microblaze_0_axi_periph/S03_ARESETN] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_clk_wiz_1_100M/peripheral_aresetn]
+  connect_bd_net -net utmi_clock_0_1 [get_bd_ports utmi_clock_0] [get_bd_pins utmi_wrapper_0/utmi_clock]
+  connect_bd_net -net utmi_hostdisc_0_1 [get_bd_ports utmi_hostdisc_0] [get_bd_pins utmi_wrapper_0/utmi_hostdisc]
+  connect_bd_net -net utmi_iddig_0_1 [get_bd_ports utmi_iddig_0] [get_bd_pins utmi_wrapper_0/utmi_iddig]
+  connect_bd_net -net utmi_linestate_0_1 [get_bd_ports utmi_linestate_0] [get_bd_pins utmi_wrapper_0/utmi_linestate]
+  connect_bd_net -net utmi_rxactive_0_1 [get_bd_ports utmi_rxactive_0] [get_bd_pins utmi_wrapper_0/utmi_rxactive]
+  connect_bd_net -net utmi_rxerror_0_1 [get_bd_ports utmi_rxerror_0] [get_bd_pins utmi_wrapper_0/utmi_rxerror]
+  connect_bd_net -net utmi_rxvalid_0_1 [get_bd_ports utmi_rxvalid_0] [get_bd_pins utmi_wrapper_0/utmi_rxvalid]
+  connect_bd_net -net utmi_sessend_0_1 [get_bd_ports utmi_sessend_0] [get_bd_pins utmi_wrapper_0/utmi_sessend]
+  connect_bd_net -net utmi_txready_0_1 [get_bd_ports utmi_txready_0] [get_bd_pins utmi_wrapper_0/utmi_txready]
+  connect_bd_net -net utmi_vbusvalid_0_1 [get_bd_ports utmi_vbusvalid_0] [get_bd_pins utmi_wrapper_0/utmi_vbusvalid]
+  connect_bd_net -net utmi_wrapper_0_ulpi_clock [get_bd_pins axi_usb2_device_0/ulpi_clock] [get_bd_pins utmi_wrapper_0/ulpi_clock]
+  connect_bd_net -net utmi_wrapper_0_ulpi_data_o [get_bd_pins axi_usb2_device_0/ulpi_data_i] [get_bd_pins utmi_wrapper_0/ulpi_data_o]
+  connect_bd_net -net utmi_wrapper_0_ulpi_dir [get_bd_pins axi_usb2_device_0/ulpi_dir] [get_bd_pins utmi_wrapper_0/ulpi_dir]
+  connect_bd_net -net utmi_wrapper_0_ulpi_next [get_bd_pins axi_usb2_device_0/ulpi_next] [get_bd_pins utmi_wrapper_0/ulpi_next]
+  connect_bd_net -net utmi_wrapper_0_utmi_chrgvbus [get_bd_ports utmi_chrgvbus_0] [get_bd_pins utmi_wrapper_0/utmi_chrgvbus]
+  connect_bd_net -net utmi_wrapper_0_utmi_dischrgvbus [get_bd_ports utmi_dischrgvbus_0] [get_bd_pins utmi_wrapper_0/utmi_dischrgvbus]
+  connect_bd_net -net utmi_wrapper_0_utmi_dmpulldown [get_bd_ports utmi_dmpulldown_0] [get_bd_pins utmi_wrapper_0/utmi_dmpulldown]
+  connect_bd_net -net utmi_wrapper_0_utmi_dppulldown [get_bd_ports utmi_dppulldown_0] [get_bd_pins utmi_wrapper_0/utmi_dppulldown]
+  connect_bd_net -net utmi_wrapper_0_utmi_idpullup [get_bd_ports utmi_idpullup_0] [get_bd_pins utmi_wrapper_0/utmi_idpullup]
+  connect_bd_net -net utmi_wrapper_0_utmi_opmode [get_bd_ports utmi_opmode_0] [get_bd_pins utmi_wrapper_0/utmi_opmode]
+  connect_bd_net -net utmi_wrapper_0_utmi_reset [get_bd_ports utmi_reset_0] [get_bd_pins utmi_wrapper_0/utmi_reset]
+  connect_bd_net -net utmi_wrapper_0_utmi_suspend_n [get_bd_ports utmi_suspend_n_0] [get_bd_pins utmi_wrapper_0/utmi_suspend_n]
+  connect_bd_net -net utmi_wrapper_0_utmi_termsel [get_bd_ports utmi_termsel_0] [get_bd_pins utmi_wrapper_0/utmi_termsel]
+  connect_bd_net -net utmi_wrapper_0_utmi_txvalid [get_bd_ports utmi_txvalid_0] [get_bd_pins utmi_wrapper_0/utmi_txvalid]
+  connect_bd_net -net utmi_wrapper_0_utmi_xcvrsel [get_bd_ports utmi_xcvrsel_0] [get_bd_pins utmi_wrapper_0/utmi_xcvrsel]
 
   # Create address segments
   create_bd_addr_seg -range 0x00010000 -offset 0x40E00000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_ethernetlite_0/S_AXI/Reg] SEG_axi_ethernetlite_0_Reg
@@ -555,6 +629,8 @@ proc create_root_design { parentCell } {
   create_bd_addr_seg -range 0x00010000 -offset 0x41C00000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs axi_timer_0/S_AXI/Reg] SEG_axi_timer_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40600000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_uartlite_0/S_AXI/Reg] SEG_axi_uartlite_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40600000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs axi_uartlite_0/S_AXI/Reg] SEG_axi_uartlite_0_Reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x44800000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_usb2_device_0/S_AXI/Reg] SEG_axi_usb2_device_0_Reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x44800000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs axi_usb2_device_0/S_AXI/Reg] SEG_axi_usb2_device_0_Reg
   create_bd_addr_seg -range 0x00020000 -offset 0x00000000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x00020000 -offset 0x00000000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x00001000 -offset 0x41400000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs mdm_1/S_AXI/Reg] SEG_mdm_1_Reg
