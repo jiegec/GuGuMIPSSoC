@@ -68,14 +68,16 @@ int main()
 
     print("Hello World USB\r\n");
 
-    usleep(1000000);
 
-    print("Read Ctrl\r\n");
-    //xil_printf("ctrl %08x\r\n", *USB_CTRL);
-    print("Read status\r\n");
-    xil_printf("status %08x\r\n", *USB_STATUS);
-    print("Read irq\r\n");
-    //xil_printf("irq %08x\r\n", *USB_IRQ_STS);
+    while (1) {
+        usleep(1000000);
+        print("Read Ctrl\r\n");
+        xil_printf("ctrl %08x\r\n", *USB_CTRL);
+        print("Read status\r\n");
+        xil_printf("status %08x\r\n", *USB_STATUS);
+        print("Read irq\r\n");
+        xil_printf("irq %08x\r\n", *USB_IRQ_STS);
+    }
 
     cleanup_platform();
     return 0;
