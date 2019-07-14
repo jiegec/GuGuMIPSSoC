@@ -461,9 +461,9 @@ proc create_root_design { parentCell } {
   # Create instance: microblaze_0, and set properties
   set microblaze_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:11.0 microblaze_0 ]
   set_property -dict [ list \
-   CONFIG.C_ADDR_TAG_BITS {15} \
+   CONFIG.C_ADDR_TAG_BITS {1} \
    CONFIG.C_CACHE_BYTE_SIZE {65536} \
-   CONFIG.C_DCACHE_ADDR_TAG {15} \
+   CONFIG.C_DCACHE_ADDR_TAG {1} \
    CONFIG.C_DCACHE_BYTE_SIZE {65536} \
    CONFIG.C_DCACHE_VICTIMS {8} \
    CONFIG.C_DEBUG_ENABLED {1} \
@@ -614,8 +614,8 @@ proc create_root_design { parentCell } {
   create_bd_addr_seg -range 0x00010000 -offset 0x41200000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs microblaze_0_axi_intc/S_AXI/Reg] SEG_microblaze_0_axi_intc_Reg
   create_bd_addr_seg -range 0x08000000 -offset 0x80000000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs mig_7series_0/memmap/memaddr] SEG_mig_7series_0_memaddr
   create_bd_addr_seg -range 0x08000000 -offset 0x80000000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs mig_7series_0/memmap/memaddr] SEG_mig_7series_0_memaddr
-  create_bd_addr_seg -range 0x40000000 -offset 0xC0000000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs usbh_host_0/cfg/reg0] SEG_usbh_host_0_reg0
-  create_bd_addr_seg -range 0x40000000 -offset 0xC0000000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs usbh_host_0/cfg/reg0] SEG_usbh_host_0_reg0
+  create_bd_addr_seg -range 0x00010000 -offset 0x40000000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs usbh_host_0/cfg/reg0] SEG_usbh_host_0_reg0
+  create_bd_addr_seg -range 0x00010000 -offset 0x40000000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs usbh_host_0/cfg/reg0] SEG_usbh_host_0_reg0
 
 
   # Restore current instance
