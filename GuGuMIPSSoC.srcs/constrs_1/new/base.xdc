@@ -56,7 +56,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports mdio_mdc]
 set_property IOSTANDARD LVCMOS33 [get_ports mdio_mdio_io]
 
 # usb utmi
-create_clock -period 16.667 -name clk -waveform {0.000 8.333} [get_ports utmi_clock_0]
+create_clock -period 16.667 -name utmi_clk -waveform {0.000 8.333} [get_ports utmi_clock_0]
 set_property PACKAGE_PIN AF3 [get_ports utmi_chrgvbus_0]
 set_property PACKAGE_PIN AA20 [get_ports utmi_clock_0]
 set_property PACKAGE_PIN AA3 [get_ports {utmi_data_0[0]}]

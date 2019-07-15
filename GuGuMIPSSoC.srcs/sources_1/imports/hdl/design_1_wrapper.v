@@ -235,9 +235,14 @@ module design_1_wrapper
         .IO(mdio_mdio_io),
         .O(mdio_mdio_i),
         .T(mdio_mdio_t));
-  IOBUF utmi_iobuf
-       (.I(utmi_0_data_out),
-        .IO(utmi_data_0),
-        .O(utmi_0_data_in),
+  generate
+    genvar i;
+    for (i = 0;i < 8;i = i + 1) begin
+      IOBUF utmi_iobuf
+       (.I(utmi_0_data_out[i]),
+        .IO(utmi_data_0[i]),
+        .O(utmi_0_data_in[i]),
         .T(utmi_0_txvalid));
+    end
+  endgenerate
 endmodule
