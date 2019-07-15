@@ -49,6 +49,9 @@
 #include "platform.h"
 #include "xil_printf.h"
 
+#include "usb_hw.h"
+#include "usb_core.h"
+
 volatile u32 *USB_CTRL = (u32 *)0x40000000;
 volatile u32 *USB_STATUS = (u32 *)0x40000004;
 volatile u32 *USB_IRQ_ACK = (u32 *)0x40000008;
@@ -62,23 +65,42 @@ volatile u32 *USB_RD_DATA = (u32 *)0x40000020;
 
 int main()
 {
-    init_platform();
+  struct usb_device dev;
+  init_platform();
 
-    Xil_DCacheDisable();
+  Xil_DCacheDisable();
 
-    print("Hello World USB\r\n");
+  print("Hello World USB\r\n");
 
+  /*
+      while (1) {
+          usleep(1000000);
+          print("Read Ctrl\r\n");
+          xil_printf("ctrl %08x\r\n", *USB_CTRL);
+          print("Read status\r\n");
+          xil_printf("status %08x\r\n", *USB_STATUS);
+          print("Read irq\r\n");
+          xil_printf("irq %08x\r\n", *USB_IRQ_STS);
+      }
+      */
 
-    while (1) {
-        usleep(1000000);
-        print("Read Ctrl\r\n");
-        xil_printf("ctrl %08x\r\n", *USB_CTRL);
-        print("Read status\r\n");
-        xil_printf("status %08x\r\n", *USB_STATUS);
-        print("Read irq\r\n");
-        xil_printf("irq %08x\r\n", *USB_IRQ_STS);
-    }
+  usbhw_init(0x40000000);
+  usbhw_reset();
 
-    cleanup_platform();
-    return 0;
+  usb_init();
+  xil_printf("Device detected, full: %d\r\n", usbhw_hub_full_speed_device());
+  int res = usb_configure_device(&dev, 0);
+  xil_printf("configure with res %d\r\n", res);
+
+  while (1) {
+          usleep(1000000);
+          xil_printf("ctrl %08x\r\n", *USB_CTRL);
+          xil_printf("status %08x\r\n", *USB_STATUS);
+          xil_printf("stat %08x\r\n", *USB_RX_STAT);
+          xil_printf("irq %08x\r\n", *USB_IRQ_STS);
+          *USB_IRQ_ACK = *USB_IRQ_STS;
+  };
+
+  cleanup_platform();
+  return 0;
 }
