@@ -242,7 +242,7 @@ module design_1_wrapper
        (.I(utmi_0_data_out[i]),
         .IO(utmi_data_0[i]),
         .O(utmi_0_data_in[i]),
-        .T(utmi_0_txvalid));
+        .T(!utmi_0_txvalid));
     end
   endgenerate
 endmodule
