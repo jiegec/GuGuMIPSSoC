@@ -2,38 +2,46 @@
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 6.8.11  2018-08-07 bk=1.4403 VDI=40 GEI=35 GUI=JA:9.0 TLS
 #  -string -flagsOSRD
-preplace port resetn -pg 1 -y 270 -defaultsOSRD
-preplace port uart -pg 1 -y 300 -defaultsOSRD
-preplace port clk -pg 1 -y 390 -defaultsOSRD
-preplace inst xlconstant_0 -pg 1 -lvl 1 -y 330 -defaultsOSRD
-preplace inst jtag_axi_0 -pg 1 -lvl 5 -y 70 -defaultsOSRD
-preplace inst util_vector_logic_0 -pg 1 -lvl 4 -y 250 -defaultsOSRD
-preplace inst blk_mem_gen_0 -pg 1 -lvl 8 -y 170 -defaultsOSRD
-preplace inst system_ila_0 -pg 1 -lvl 6 -y 100 -defaultsOSRD
-preplace inst axi_uartlite_0 -pg 1 -lvl 7 -y 310 -defaultsOSRD
-preplace inst clk_wiz_0 -pg 1 -lvl 2 -y 340 -defaultsOSRD
-preplace inst axi_mem_intercon -pg 1 -lvl 6 -y 340 -defaultsOSRD
-preplace inst mycpu_top_0 -pg 1 -lvl 5 -y 230 -defaultsOSRD
-preplace inst axi_bram_ctrl_0 -pg 1 -lvl 7 -y 170 -defaultsOSRD
-preplace inst rst_clk_wiz_0_50M -pg 1 -lvl 3 -y 290 -defaultsOSRD
-preplace netloc axi_mem_intercon_M01_AXI 1 6 1 1700
-preplace netloc clk_wiz_0_locked 1 2 1 330
-preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 7 1 NJ
-preplace netloc axi_smc_M00_AXI 1 5 2 1350 10 1680
-preplace netloc util_vector_logic_0_Res 1 4 1 1000
-preplace netloc resetn_0_1 1 0 3 NJ 270 NJ 270 NJ
-preplace netloc jtag_axi_0_M_AXI 1 5 1 1320
-preplace netloc rst_clk_wiz_0_50M_mb_reset 1 3 1 NJ
-preplace netloc rst_clk_wiz_0_50M_peripheral_aresetn 1 3 4 700J 180 1000 140 1350 520 1710
-preplace netloc mycpu_top_0_interface_aximm 1 5 1 1330
-preplace netloc xlconstant_0_dout 1 1 1 NJ
-preplace netloc clk_wiz_0_clk_out1 1 2 5 320 190 NJ 190 1010 150 1340 510 1690
-preplace netloc clk_in1_0_1 1 0 2 -40J 260 120J
-preplace netloc axi_uartlite_0_UART 1 7 2 NJ 300 NJ
-levelinfo -pg 1 -60 40 220 517 850 1163 1530 1890 2170 2320 -top 0 -bot 710
+preplace port DDR3_0 -pg 1 -y 260 -defaultsOSRD
+preplace port resetn -pg 1 -y 470 -defaultsOSRD
+preplace port uart -pg 1 -y 640 -defaultsOSRD
+preplace port clk -pg 1 -y 610 -defaultsOSRD
+preplace inst mig_7series_0 -pg 1 -lvl 5 -y 310 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 3 -y 550 -defaultsOSRD
+preplace inst jtag_axi_0 -pg 1 -lvl 3 -y 120 -defaultsOSRD
+preplace inst util_vector_logic_0 -pg 1 -lvl 2 -y 280 -defaultsOSRD
+preplace inst rst_mig_7series_0_cpu -pg 1 -lvl 1 -y 320 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 6 -y 510 -defaultsOSRD
+preplace inst system_ila_0 -pg 1 -lvl 5 -y 90 -defaultsOSRD
+preplace inst axi_uartlite_0 -pg 1 -lvl 5 -y 650 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 4 -y 560 -defaultsOSRD
+preplace inst axi_mem_intercon -pg 1 -lvl 4 -y 250 -defaultsOSRD
+preplace inst mycpu_top_0 -pg 1 -lvl 3 -y 280 -defaultsOSRD
+preplace inst axi_bram_ctrl_0 -pg 1 -lvl 5 -y 510 -defaultsOSRD
+preplace netloc axi_mem_intercon_M01_AXI 1 4 1 1450
+preplace netloc mig_7series_0_mmcm_locked 1 0 6 30 490 NJ 490 NJ 490 NJ 490 1430J 430 1800
+preplace netloc mig_7series_0_DDR3 1 5 2 NJ 260 NJ
+preplace netloc mig_7series_0_ui_addn_clk_0 1 0 6 20 220 NJ 220 700 200 1060 440 1460 420 1810
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 5 1 NJ
+preplace netloc axi_smc_M00_AXI 1 4 1 1490
+preplace netloc ARESETN_1 1 1 3 NJ 340 720J 190 1050
+preplace netloc util_vector_logic_0_Res 1 2 1 N
+preplace netloc jtag_axi_0_M_AXI 1 3 1 N
+preplace netloc axi_mem_intercon_M02_AXI 1 4 1 N
+preplace netloc mig_7series_0_ui_clk 1 3 3 1080 460 1440J 200 1800
+preplace netloc mycpu_top_0_interface_aximm 1 3 2 1040 60 NJ
+preplace netloc resetn_1 1 0 5 NJ 470 NJ 470 NJ 470 NJ 470 1480J
+preplace netloc rst_mig_7series_0_100M_peripheral_aresetn 1 1 4 NJ 360 710 360 1070 480 1470
+preplace netloc xlconstant_0_dout 1 3 1 NJ
+preplace netloc clk_wiz_0_clk_out1 1 4 1 1500
+preplace netloc clk_in1_0_1 1 0 4 NJ 610 NJ 610 NJ 610 1060J
+preplace netloc axi_uartlite_0_UART 1 5 2 NJ 640 NJ
+preplace netloc rst_mig_7series_0_cpu_mb_reset 1 1 1 NJ
+preplace netloc mig_7series_0_ui_clk_sync_rst 1 0 6 20 450 NJ 450 NJ 450 NJ 450 1420J 190 1810
+levelinfo -pg 1 0 210 550 870 1250 1660 1940 2090 -top 0 -bot 730
 "
 }
 {
-   "da_axi4_cnt":"6",
+   "da_axi4_cnt":"7",
    "da_board_cnt":"1"
 }

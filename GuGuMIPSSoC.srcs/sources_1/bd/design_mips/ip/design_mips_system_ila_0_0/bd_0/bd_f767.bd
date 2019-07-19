@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xEF1BDE35F89DA623",
+      "boundary_crc": "0xEF1BDE3505CD19F4",
       "design_src": "SBD",
       "device": "xc7a200tfbg676-2",
       "name": "bd_f767",
@@ -46,7 +46,7 @@
             "value_src": "default"
           },
           "CLK_DOMAIN": {
-            "value": "/clk_wiz_0_clk_out1",
+            "value": "design_mips_mig_7series_0_0_ui_clk",
             "value_src": "default"
           },
           "DATA_WIDTH": {
@@ -122,8 +122,8 @@
             "value_src": "default"
           },
           "PHASE": {
-            "value": "0.0",
-            "value_src": "default"
+            "value": "0",
+            "value_src": "default_prop"
           },
           "PROTOCOL": {
             "value": "AXI3",
@@ -176,7 +176,7 @@
             "value_src": "default"
           },
           "CLK_DOMAIN": {
-            "value": "/clk_wiz_0_clk_out1",
+            "value": "design_mips_mig_7series_0_0_ui_clk",
             "value_src": "default"
           },
           "DATA_WIDTH": {
@@ -252,8 +252,8 @@
             "value_src": "default"
           },
           "PHASE": {
-            "value": "0.0",
-            "value_src": "default"
+            "value": "0",
+            "value_src": "default_prop"
           },
           "PROTOCOL": {
             "value": "AXI4",
@@ -298,7 +298,7 @@
             "value": "resetn"
           },
           "CLK_DOMAIN": {
-            "value": "/clk_wiz_0_clk_out1",
+            "value": "design_mips_mig_7series_0_0_ui_clk",
             "value_src": "default_prop"
           },
           "FREQ_HZ": {
@@ -310,7 +310,7 @@
             "value_src": "default"
           },
           "PHASE": {
-            "value": "0.0",
+            "value": "0",
             "value_src": "default_prop"
           }
         }
@@ -1032,16 +1032,16 @@
       }
     },
     "interface_nets": {
-      "Conn": {
-        "interface_ports": [
-          "SLOT_0_AXI",
-          "g_inst/slot_0_axi"
-        ]
-      },
       "Conn1": {
         "interface_ports": [
           "SLOT_1_AXI",
           "g_inst/slot_1_axi"
+        ]
+      },
+      "Conn": {
+        "interface_ports": [
+          "SLOT_0_AXI",
+          "g_inst/slot_0_axi"
         ]
       }
     },
