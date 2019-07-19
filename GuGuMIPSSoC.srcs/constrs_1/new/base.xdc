@@ -122,4 +122,3 @@ set_property IOSTANDARD LVCMOS33 [get_ports utmi_txvalid_0]
 set_property IOSTANDARD LVCMOS33 [get_ports utmi_vbusvalid_0]
 set_property IOSTANDARD LVCMOS33 [get_ports {utmi_xcvrsel_0[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {utmi_xcvrsel_0[1]}]
-
