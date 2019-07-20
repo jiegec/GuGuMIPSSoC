@@ -40,13 +40,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="20"/>
-    <Option Name="WTModelSimExportSim" Val="20"/>
-    <Option Name="WTQuestaExportSim" Val="20"/>
-    <Option Name="WTIesExportSim" Val="20"/>
-    <Option Name="WTVcsExportSim" Val="20"/>
-    <Option Name="WTRivieraExportSim" Val="20"/>
-    <Option Name="WTActivehdlExportSim" Val="20"/>
+    <Option Name="WTXSimExportSim" Val="21"/>
+    <Option Name="WTModelSimExportSim" Val="21"/>
+    <Option Name="WTQuestaExportSim" Val="21"/>
+    <Option Name="WTIesExportSim" Val="21"/>
+    <Option Name="WTVcsExportSim" Val="21"/>
+    <Option Name="WTRivieraExportSim" Val="21"/>
+    <Option Name="WTActivehdlExportSim" Val="21"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -192,9 +192,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_clk_wiz_0_0/design_mips_clk_wiz_0_0.xci">
-          <Proxy FileSetName="design_mips_clk_wiz_0_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_axi_bram_ctrl_0_0/design_mips_axi_bram_ctrl_0_0.xci">
           <Proxy FileSetName="design_mips_axi_bram_ctrl_0_0"/>
         </CompFileExtendedInfo>
@@ -219,14 +216,8 @@
         <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_xbar_0/design_mips_xbar_0.xci">
           <Proxy FileSetName="design_mips_xbar_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_rst_mig_7series_0_100M_0/design_mips_rst_mig_7series_0_100M_0.xci">
-          <Proxy FileSetName="design_mips_rst_mig_7series_0_100M_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_mig_7series_0_0/design_mips_mig_7series_0_0.xci">
-          <Proxy FileSetName="design_mips_mig_7series_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_auto_cc_0/design_mips_auto_cc_0.xci">
-          <Proxy FileSetName="design_mips_auto_cc_0"/>
+        <CompFileExtendedInfo CompFileName="design_mips.bd" FileRelPathName="ip/design_mips_axi_intc_0_0/design_mips_axi_intc_0_0.xci">
+          <Proxy FileSetName="design_mips_axi_intc_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/design_mips/hdl/design_mips_wrapper.v">
@@ -310,6 +301,12 @@
           <Attr Name="ScopedToCell" Val="design_mips_mig_7series_0_0"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../GuGuMIPS/boot/bootloader.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="design_mips_wrapper"/>
@@ -352,12 +349,6 @@
         <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
-    <FileSet Name="design_mips_clk_wiz_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_clk_wiz_0_0">
-      <Config>
-        <Option Name="TopModule" Val="design_mips_clk_wiz_0_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="design_mips_util_vector_logic_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_util_vector_logic_0_0">
       <Config>
         <Option Name="TopModule" Val="design_mips_util_vector_logic_0_0"/>
@@ -382,18 +373,6 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="design_mips_mycpu_top_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_mycpu_top_0_0">
-      <Config>
-        <Option Name="TopModule" Val="design_mips_mycpu_top_0_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="design_mips_blk_mem_gen_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_blk_mem_gen_0_0">
-      <Config>
-        <Option Name="TopModule" Val="design_mips_blk_mem_gen_0_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="design_mips_axi_bram_ctrl_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_axi_bram_ctrl_0_0">
       <Config>
         <Option Name="TopModule" Val="design_mips_axi_bram_ctrl_0_0"/>
@@ -406,21 +385,21 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="design_mips_rst_mig_7series_0_100M_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_rst_mig_7series_0_100M_0">
+    <FileSet Name="design_mips_axi_intc_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_axi_intc_0_0">
       <Config>
-        <Option Name="TopModule" Val="design_mips_rst_mig_7series_0_100M_0"/>
+        <Option Name="TopModule" Val="design_mips_axi_intc_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="design_mips_mig_7series_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_mig_7series_0_0">
+    <FileSet Name="design_mips_blk_mem_gen_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_blk_mem_gen_0_0">
       <Config>
-        <Option Name="TopModule" Val="design_mips_mig_7series_0_0"/>
+        <Option Name="TopModule" Val="design_mips_blk_mem_gen_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="design_mips_auto_cc_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_auto_cc_0">
+    <FileSet Name="design_mips_mycpu_top_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_mips_mycpu_top_0_0">
       <Config>
-        <Option Name="TopModule" Val="design_mips_auto_cc_0"/>
+        <Option Name="TopModule" Val="design_mips_mycpu_top_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -451,15 +430,6 @@
   </Simulators>
   <Runs Version="1" Minor="10">
     <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7a200tfbg676-2" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" Dir="$PRUNDIR/synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="design_mips_clk_wiz_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_clk_wiz_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_clk_wiz_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_clk_wiz_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
@@ -504,26 +474,6 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_mycpu_top_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_mycpu_top_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_mycpu_top_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_mycpu_top_0_0_synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="design_mips_blk_mem_gen_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_blk_mem_gen_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_blk_mem_gen_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_blk_mem_gen_0_0_synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
     <Run Id="design_mips_axi_bram_ctrl_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_axi_bram_ctrl_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_axi_bram_ctrl_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_axi_bram_ctrl_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
@@ -546,7 +496,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_rst_mig_7series_0_100M_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_rst_mig_7series_0_100M_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_rst_mig_7series_0_100M_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_rst_mig_7series_0_100M_0_synth_1" IncludeInArchive="true">
+    <Run Id="design_mips_axi_intc_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_axi_intc_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_axi_intc_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_axi_intc_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -557,7 +507,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_mig_7series_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_mig_7series_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_mig_7series_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_mig_7series_0_0_synth_1" IncludeInArchive="true">
+    <Run Id="design_mips_blk_mem_gen_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_blk_mem_gen_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_blk_mem_gen_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_blk_mem_gen_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -568,7 +518,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_auto_cc_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_auto_cc_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_auto_cc_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_auto_cc_0_synth_1" IncludeInArchive="true">
+    <Run Id="design_mips_mycpu_top_0_0_synth_1" Type="Ft3:Synth" SrcSet="design_mips_mycpu_top_0_0" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_mycpu_top_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_mips_mycpu_top_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -593,22 +543,6 @@
         <Step Id="write_bitstream"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="design_mips_clk_wiz_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_clk_wiz_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_clk_wiz_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
@@ -676,40 +610,6 @@
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_mycpu_top_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_mycpu_top_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_mycpu_top_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="design_mips_blk_mem_gen_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_blk_mem_gen_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_blk_mem_gen_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
     <Run Id="design_mips_axi_bram_ctrl_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_axi_bram_ctrl_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_axi_bram_ctrl_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
@@ -746,7 +646,7 @@
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_rst_mig_7series_0_100M_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_rst_mig_7series_0_100M_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_rst_mig_7series_0_100M_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="design_mips_axi_intc_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_axi_intc_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_axi_intc_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
           <Desc>Default settings for Implementation.</Desc>
@@ -764,7 +664,7 @@
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_mig_7series_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_mig_7series_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_mig_7series_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="design_mips_blk_mem_gen_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_blk_mem_gen_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_blk_mem_gen_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
           <Desc>Default settings for Implementation.</Desc>
@@ -782,7 +682,7 @@
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="design_mips_auto_cc_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_auto_cc_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_auto_cc_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="design_mips_mycpu_top_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a200tfbg676-2" ConstrsSet="design_mips_mycpu_top_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_mips_mycpu_top_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
           <Desc>Default settings for Implementation.</Desc>

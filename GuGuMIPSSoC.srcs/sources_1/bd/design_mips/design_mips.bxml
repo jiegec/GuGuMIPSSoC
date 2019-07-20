@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="design_mips" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1563555290"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1563555290"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1563555290"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1563555290"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1563639959"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1563639959"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1563639959"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1563639959"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="synth/design_mips.v" Type="Verilog">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
@@ -122,7 +122,15 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip/design_mips_auto_pc_1/design_mips_auto_pc_1.xci" Type="IP">
+      <File Name="ip/design_mips_axi_intc_0_0/design_mips_axi_intc_0_0.xci" Type="IP">
+        <Instance HierarchyPath="axi_intc_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_mips_auto_pc_2/design_mips_auto_pc_2.xci" Type="IP">
         <Instance HierarchyPath="axi_mem_intercon/s01_couplers/auto_pc"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
@@ -140,6 +148,14 @@
       </File>
       <File Name="ip/design_mips_auto_cc_0/design_mips_auto_cc_0.xci" Type="IP">
         <Instance HierarchyPath="axi_mem_intercon/m02_couplers/auto_cc"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_mips_auto_pc_1/design_mips_auto_pc_1.xci" Type="IP">
+        <Instance HierarchyPath="axi_mem_intercon/m03_couplers/auto_pc"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
