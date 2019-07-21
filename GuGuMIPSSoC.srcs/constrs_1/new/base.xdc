@@ -120,3 +120,7 @@ set_property -dict {PACKAGE_PIN P20 IOSTANDARD LVCMOS33} [get_ports spi_sck_io]
 set_property -dict {PACKAGE_PIN R20 IOSTANDARD LVCMOS33} [get_ports {spi_ss_io[0]}]
 set_property -dict {PACKAGE_PIN N18 IOSTANDARD LVCMOS33} [get_ports spi_io0_io]
 set_property -dict {PACKAGE_PIN P19 IOSTANDARD LVCMOS33} [get_ports spi_io1_io]
+
+# ps/2
+set_property -dict {PACKAGE_PIN AD1 IOSTANDARD LVCMOS33} [get_ports ps2_dat_tri_io]
+set_property -dict {PACKAGE_PIN Y2 IOSTANDARD LVCMOS33} [get_ports ps2_clk_tri_io]
