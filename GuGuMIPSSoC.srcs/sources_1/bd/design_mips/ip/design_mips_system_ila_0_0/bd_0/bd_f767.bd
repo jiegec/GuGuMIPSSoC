@@ -1,14 +1,13 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x4A4B2A84845518BA",
+      "boundary_crc": "0xB2CC9E7CE1A89E43",
       "design_src": "SBD",
       "device": "xc7a200tfbg676-2",
       "name": "bd_f767",
       "scoped": "true",
       "synth_flow_mode": "None",
-      "tool_version": "2018.3",
-      "validated": "true"
+      "tool_version": "2018.3"
     },
     "design_tree": {
       "ila_lib": "",
@@ -27,263 +26,11 @@
     "interface_ports": {
       "SLOT_0_AXI": {
         "mode": "Monitor",
-        "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-        "parameters": {
-          "ADDR_WIDTH": {
-            "value": "32",
-            "value_src": "default"
-          },
-          "ARUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "AWUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "BUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "CLK_DOMAIN": {
-            "value": "design_mips_mig_7series_0_0_ui_clk",
-            "value_src": "default"
-          },
-          "DATA_WIDTH": {
-            "value": "32",
-            "value_src": "default"
-          },
-          "FREQ_HZ": {
-            "value": "50000000",
-            "value_src": "default"
-          },
-          "HAS_BRESP": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_BURST": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_CACHE": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_LOCK": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_PROT": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_QOS": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "HAS_REGION": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "HAS_RRESP": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_WSTRB": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "ID_WIDTH": {
-            "value": "4",
-            "value_src": "default"
-          },
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "MAX_BURST_LENGTH": {
-            "value": "16",
-            "value_src": "default"
-          },
-          "NUM_READ_OUTSTANDING": {
-            "value": "2",
-            "value_src": "default"
-          },
-          "NUM_READ_THREADS": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "NUM_WRITE_OUTSTANDING": {
-            "value": "2",
-            "value_src": "default"
-          },
-          "NUM_WRITE_THREADS": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "PHASE": {
-            "value": "0",
-            "value_src": "default_prop"
-          },
-          "PROTOCOL": {
-            "value": "AXI3",
-            "value_src": "default"
-          },
-          "READ_WRITE_MODE": {
-            "value": "READ_WRITE",
-            "value_src": "default"
-          },
-          "RUSER_BITS_PER_BYTE": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "RUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "SUPPORTS_NARROW_BURST": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "WUSER_BITS_PER_BYTE": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "WUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          }
-        }
+        "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
       },
       "SLOT_1_AXI": {
         "mode": "Monitor",
-        "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-        "parameters": {
-          "ADDR_WIDTH": {
-            "value": "13",
-            "value_src": "default"
-          },
-          "ARUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "AWUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "BUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "CLK_DOMAIN": {
-            "value": "design_mips_mig_7series_0_0_ui_clk",
-            "value_src": "default"
-          },
-          "DATA_WIDTH": {
-            "value": "32",
-            "value_src": "default"
-          },
-          "FREQ_HZ": {
-            "value": "50000000",
-            "value_src": "default"
-          },
-          "HAS_BRESP": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_BURST": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_CACHE": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_LOCK": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_PROT": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_QOS": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_REGION": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "HAS_RRESP": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "HAS_WSTRB": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "ID_WIDTH": {
-            "value": "5",
-            "value_src": "default"
-          },
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "MAX_BURST_LENGTH": {
-            "value": "256",
-            "value_src": "default"
-          },
-          "NUM_READ_OUTSTANDING": {
-            "value": "2",
-            "value_src": "default"
-          },
-          "NUM_READ_THREADS": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "NUM_WRITE_OUTSTANDING": {
-            "value": "2",
-            "value_src": "default"
-          },
-          "NUM_WRITE_THREADS": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "PHASE": {
-            "value": "0",
-            "value_src": "default_prop"
-          },
-          "PROTOCOL": {
-            "value": "AXI4",
-            "value_src": "default"
-          },
-          "READ_WRITE_MODE": {
-            "value": "READ_WRITE",
-            "value_src": "default"
-          },
-          "RUSER_BITS_PER_BYTE": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "RUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "SUPPORTS_NARROW_BURST": {
-            "value": "1",
-            "value_src": "default"
-          },
-          "WUSER_BITS_PER_BYTE": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "WUSER_WIDTH": {
-            "value": "0",
-            "value_src": "default"
-          }
-        }
+        "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
       }
     },
     "ports": {
@@ -296,22 +43,6 @@
           },
           "ASSOCIATED_RESET": {
             "value": "resetn"
-          },
-          "CLK_DOMAIN": {
-            "value": "design_mips_mig_7series_0_0_ui_clk",
-            "value_src": "default_prop"
-          },
-          "FREQ_HZ": {
-            "value": "50000000",
-            "value_src": "default_prop"
-          },
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "PHASE": {
-            "value": "0",
-            "value_src": "default_prop"
           }
         }
       },
@@ -332,17 +63,7 @@
       },
       "resetn": {
         "type": "rst",
-        "direction": "I",
-        "parameters": {
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "POLARITY": {
-            "value": "ACTIVE_LOW",
-            "value_src": "constant"
-          }
-        }
+        "direction": "I"
       }
     },
     "components": {
@@ -378,7 +99,7 @@
             "value": "Native"
           },
           "C_NUM_OF_PROBES": {
-            "value": "70"
+            "value": "68"
           },
           "C_PROBE0_MU_CNT": {
             "value": "1"
@@ -597,7 +318,7 @@
             "value": "0"
           },
           "C_PROBE40_WIDTH": {
-            "value": "5"
+            "value": "4"
           },
           "C_PROBE41_TYPE": {
             "value": "0"
@@ -621,31 +342,31 @@
             "value": "0"
           },
           "C_PROBE44_WIDTH": {
-            "value": "4"
+            "value": "3"
           },
           "C_PROBE45_TYPE": {
             "value": "0"
           },
           "C_PROBE45_WIDTH": {
-            "value": "3"
+            "value": "2"
           },
           "C_PROBE46_TYPE": {
             "value": "0"
           },
           "C_PROBE46_WIDTH": {
-            "value": "2"
+            "value": "13"
           },
           "C_PROBE47_TYPE": {
             "value": "0"
           },
           "C_PROBE47_WIDTH": {
-            "value": "13"
+            "value": "2"
           },
           "C_PROBE48_TYPE": {
             "value": "0"
           },
           "C_PROBE48_WIDTH": {
-            "value": "2"
+            "value": "4"
           },
           "C_PROBE49_TYPE": {
             "value": "0"
@@ -663,19 +384,19 @@
             "value": "0"
           },
           "C_PROBE50_WIDTH": {
-            "value": "5"
+            "value": "8"
           },
           "C_PROBE51_TYPE": {
             "value": "0"
           },
           "C_PROBE51_WIDTH": {
-            "value": "8"
+            "value": "1"
           },
           "C_PROBE52_TYPE": {
             "value": "0"
           },
           "C_PROBE52_WIDTH": {
-            "value": "1"
+            "value": "3"
           },
           "C_PROBE53_TYPE": {
             "value": "0"
@@ -687,13 +408,13 @@
             "value": "0"
           },
           "C_PROBE54_WIDTH": {
-            "value": "4"
+            "value": "2"
           },
           "C_PROBE55_TYPE": {
             "value": "0"
           },
           "C_PROBE55_WIDTH": {
-            "value": "3"
+            "value": "4"
           },
           "C_PROBE56_TYPE": {
             "value": "0"
@@ -705,19 +426,19 @@
             "value": "0"
           },
           "C_PROBE57_WIDTH": {
-            "value": "5"
+            "value": "2"
           },
           "C_PROBE58_TYPE": {
             "value": "0"
           },
           "C_PROBE58_WIDTH": {
-            "value": "2"
+            "value": "32"
           },
           "C_PROBE59_TYPE": {
             "value": "0"
           },
           "C_PROBE59_WIDTH": {
-            "value": "2"
+            "value": "4"
           },
           "C_PROBE5_TYPE": {
             "value": "0"
@@ -729,31 +450,31 @@
             "value": "0"
           },
           "C_PROBE60_WIDTH": {
-            "value": "32"
+            "value": "2"
           },
           "C_PROBE61_TYPE": {
             "value": "0"
           },
           "C_PROBE61_WIDTH": {
-            "value": "5"
+            "value": "32"
           },
           "C_PROBE62_TYPE": {
             "value": "0"
           },
           "C_PROBE62_WIDTH": {
-            "value": "2"
+            "value": "4"
           },
           "C_PROBE63_TYPE": {
             "value": "0"
           },
           "C_PROBE63_WIDTH": {
-            "value": "32"
+            "value": "2"
           },
           "C_PROBE64_TYPE": {
             "value": "0"
           },
           "C_PROBE64_WIDTH": {
-            "value": "4"
+            "value": "3"
           },
           "C_PROBE65_TYPE": {
             "value": "0"
@@ -765,24 +486,12 @@
             "value": "0"
           },
           "C_PROBE66_WIDTH": {
-            "value": "3"
+            "value": "2"
           },
           "C_PROBE67_TYPE": {
             "value": "0"
           },
           "C_PROBE67_WIDTH": {
-            "value": "2"
-          },
-          "C_PROBE68_TYPE": {
-            "value": "0"
-          },
-          "C_PROBE68_WIDTH": {
-            "value": "2"
-          },
-          "C_PROBE69_TYPE": {
-            "value": "0"
-          },
-          "C_PROBE69_WIDTH": {
             "value": "3"
           },
           "C_PROBE6_TYPE": {
@@ -954,7 +663,7 @@
             "value": "32"
           },
           "C_SLOT_1_AXI_ID_WIDTH": {
-            "value": "5"
+            "value": "4"
           },
           "C_SLOT_1_AXI_PROTOCOL": {
             "value": "AXI4"
@@ -987,7 +696,7 @@
             "value": "1"
           },
           "C_SLOT_1_HAS_QOS": {
-            "value": "1"
+            "value": "0"
           },
           "C_SLOT_1_HAS_REGION": {
             "value": "0"
@@ -1437,136 +1146,124 @@
           "ila_lib/probe43"
         ]
       },
-      "net_slot_1_axi_arqos": {
-        "ports": [
-          "g_inst/m_slot_1_axi_arqos",
-          "ila_lib/probe44"
-        ]
-      },
       "net_slot_1_axi_arsize": {
         "ports": [
           "g_inst/m_slot_1_axi_arsize",
-          "ila_lib/probe45"
+          "ila_lib/probe44"
         ]
       },
       "net_slot_1_axi_aw_cnt": {
         "ports": [
           "g_inst/m_slot_1_axi_aw_cnt",
-          "ila_lib/probe46"
+          "ila_lib/probe45"
         ]
       },
       "net_slot_1_axi_awaddr": {
         "ports": [
           "g_inst/m_slot_1_axi_awaddr",
-          "ila_lib/probe47"
+          "ila_lib/probe46"
         ]
       },
       "net_slot_1_axi_awburst": {
         "ports": [
           "g_inst/m_slot_1_axi_awburst",
-          "ila_lib/probe48"
+          "ila_lib/probe47"
         ]
       },
       "net_slot_1_axi_awcache": {
         "ports": [
           "g_inst/m_slot_1_axi_awcache",
-          "ila_lib/probe49"
+          "ila_lib/probe48"
         ]
       },
       "net_slot_1_axi_awid": {
         "ports": [
           "g_inst/m_slot_1_axi_awid",
-          "ila_lib/probe50"
+          "ila_lib/probe49"
         ]
       },
       "net_slot_1_axi_awlen": {
         "ports": [
           "g_inst/m_slot_1_axi_awlen",
-          "ila_lib/probe51"
+          "ila_lib/probe50"
         ]
       },
       "net_slot_1_axi_awlock": {
         "ports": [
           "g_inst/m_slot_1_axi_awlock",
-          "ila_lib/probe52"
+          "ila_lib/probe51"
         ]
       },
       "net_slot_1_axi_awprot": {
         "ports": [
           "g_inst/m_slot_1_axi_awprot",
-          "ila_lib/probe53"
-        ]
-      },
-      "net_slot_1_axi_awqos": {
-        "ports": [
-          "g_inst/m_slot_1_axi_awqos",
-          "ila_lib/probe54"
+          "ila_lib/probe52"
         ]
       },
       "net_slot_1_axi_awsize": {
         "ports": [
           "g_inst/m_slot_1_axi_awsize",
-          "ila_lib/probe55"
+          "ila_lib/probe53"
         ]
       },
       "net_slot_1_axi_b_cnt": {
         "ports": [
           "g_inst/m_slot_1_axi_b_cnt",
-          "ila_lib/probe56"
+          "ila_lib/probe54"
         ]
       },
       "net_slot_1_axi_bid": {
         "ports": [
           "g_inst/m_slot_1_axi_bid",
-          "ila_lib/probe57"
+          "ila_lib/probe55"
         ]
       },
       "net_slot_1_axi_bresp": {
         "ports": [
           "g_inst/m_slot_1_axi_bresp",
-          "ila_lib/probe58"
+          "ila_lib/probe56"
         ]
       },
       "net_slot_1_axi_r_cnt": {
         "ports": [
           "g_inst/m_slot_1_axi_r_cnt",
-          "ila_lib/probe59"
+          "ila_lib/probe57"
         ]
       },
       "net_slot_1_axi_rdata": {
         "ports": [
           "g_inst/m_slot_1_axi_rdata",
-          "ila_lib/probe60"
+          "ila_lib/probe58"
         ]
       },
       "net_slot_1_axi_rid": {
         "ports": [
           "g_inst/m_slot_1_axi_rid",
-          "ila_lib/probe61"
+          "ila_lib/probe59"
         ]
       },
       "net_slot_1_axi_rresp": {
         "ports": [
           "g_inst/m_slot_1_axi_rresp",
-          "ila_lib/probe62"
+          "ila_lib/probe60"
         ]
       },
       "net_slot_1_axi_wdata": {
         "ports": [
           "g_inst/m_slot_1_axi_wdata",
-          "ila_lib/probe63"
+          "ila_lib/probe61"
         ]
       },
       "net_slot_1_axi_wstrb": {
         "ports": [
           "g_inst/m_slot_1_axi_wstrb",
-          "ila_lib/probe64"
+          "ila_lib/probe62"
         ]
       },
       "net_slot_1_axi_aw_ctrl": {
         "ports": [
           "slot_1_aw/dout",
-          "ila_lib/probe65"
+          "ila_lib/probe63"
         ]
       },
       "net_slot_1_axi_awvalid": {
@@ -1584,7 +1281,7 @@
       "net_slot_1_axi_w_ctrl": {
         "ports": [
           "slot_1_w/dout",
-          "ila_lib/probe66"
+          "ila_lib/probe64"
         ]
       },
       "net_slot_1_axi_wvalid": {
@@ -1608,7 +1305,7 @@
       "net_slot_1_axi_b_ctrl": {
         "ports": [
           "slot_1_b/dout",
-          "ila_lib/probe67"
+          "ila_lib/probe65"
         ]
       },
       "net_slot_1_axi_bvalid": {
@@ -1626,7 +1323,7 @@
       "net_slot_1_axi_ar_ctrl": {
         "ports": [
           "slot_1_ar/dout",
-          "ila_lib/probe68"
+          "ila_lib/probe66"
         ]
       },
       "net_slot_1_axi_arvalid": {
@@ -1644,7 +1341,7 @@
       "net_slot_1_axi_r_ctrl": {
         "ports": [
           "slot_1_r/dout",
-          "ila_lib/probe69"
+          "ila_lib/probe67"
         ]
       },
       "net_slot_1_axi_rvalid": {
