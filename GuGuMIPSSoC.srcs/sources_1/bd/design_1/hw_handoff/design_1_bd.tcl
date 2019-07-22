@@ -390,7 +390,7 @@ proc create_root_design { parentCell } {
   set mdio [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:mdio_rtl:1.0 mdio ]
   set mii [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:mii_rtl:1.0 mii ]
   set uart [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 uart ]
-  set utmi_0 [ create_bd_intf_port -mode Slave -vlnv user.org:user:utmi_data_rtl:1.0 utmi_0 ]
+  set utmi_data_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 utmi_data_0 ]
 
   # Create ports
   set clk [ create_bd_port -dir I -type clk clk ]
@@ -420,6 +420,7 @@ proc create_root_design { parentCell } {
   set utmi_suspend_n_0 [ create_bd_port -dir O utmi_suspend_n_0 ]
   set utmi_termsel_0 [ create_bd_port -dir O utmi_termsel_0 ]
   set utmi_txready_0 [ create_bd_port -dir I utmi_txready_0 ]
+  set utmi_txvalid_0 [ create_bd_port -dir O utmi_txvalid_0 ]
   set utmi_vbusvalid_0 [ create_bd_port -dir I utmi_vbusvalid_0 ]
   set utmi_xcvrsel_0 [ create_bd_port -dir O -from 1 -to 0 utmi_xcvrsel_0 ]
 
@@ -541,8 +542,31 @@ proc create_root_design { parentCell } {
   # Create instance: system_ila_0, and set properties
   set system_ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0 ]
   set_property -dict [ list \
+   CONFIG.C_BRAM_CNT {5} \
    CONFIG.C_MON_TYPE {INTERFACE} \
    CONFIG.C_NUM_MONITOR_SLOTS {1} \
+   CONFIG.C_NUM_OF_PROBES {1} \
+   CONFIG.C_PROBE0_TYPE {0} \
+   CONFIG.C_PROBE10_TYPE {0} \
+   CONFIG.C_PROBE11_TYPE {0} \
+   CONFIG.C_PROBE12_TYPE {0} \
+   CONFIG.C_PROBE13_TYPE {0} \
+   CONFIG.C_PROBE14_TYPE {0} \
+   CONFIG.C_PROBE15_TYPE {0} \
+   CONFIG.C_PROBE16_TYPE {0} \
+   CONFIG.C_PROBE17_TYPE {0} \
+   CONFIG.C_PROBE18_TYPE {0} \
+   CONFIG.C_PROBE19_TYPE {0} \
+   CONFIG.C_PROBE1_TYPE {0} \
+   CONFIG.C_PROBE20_TYPE {0} \
+   CONFIG.C_PROBE2_TYPE {0} \
+   CONFIG.C_PROBE3_TYPE {0} \
+   CONFIG.C_PROBE4_TYPE {0} \
+   CONFIG.C_PROBE5_TYPE {0} \
+   CONFIG.C_PROBE6_TYPE {0} \
+   CONFIG.C_PROBE7_TYPE {0} \
+   CONFIG.C_PROBE8_TYPE {0} \
+   CONFIG.C_PROBE9_TYPE {0} \
    CONFIG.C_SLOT_0_APC_EN {0} \
    CONFIG.C_SLOT_0_AXI_AR_SEL_DATA {1} \
    CONFIG.C_SLOT_0_AXI_AR_SEL_TRIG {1} \
@@ -582,7 +606,7 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets microblaze_0_axi_perip
   connect_bd_intf_net -intf_net microblaze_0_interrupt [get_bd_intf_pins microblaze_0/INTERRUPT] [get_bd_intf_pins microblaze_0_axi_intc/interrupt]
   connect_bd_intf_net -intf_net microblaze_0_mdm_axi [get_bd_intf_pins mdm_1/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M01_AXI]
   connect_bd_intf_net -intf_net mig_7series_0_DDR3 [get_bd_intf_ports DDR3_0] [get_bd_intf_pins mig_7series_0/DDR3]
-  connect_bd_intf_net -intf_net utmi_0_1 [get_bd_intf_ports utmi_0] [get_bd_intf_pins usbh_host_0/utmi]
+  connect_bd_intf_net -intf_net usbh_host_0_utmi_data [get_bd_intf_ports utmi_data_0] [get_bd_intf_pins usbh_host_0/utmi_data]
 
   # Create port connections
   connect_bd_net -net aclk_0_1 [get_bd_ports utmi_clock_0] [get_bd_pins microblaze_0_axi_periph/M06_ACLK] [get_bd_pins rst_utmi_clock_0_60M/slowest_sync_clk] [get_bd_pins system_ila_0/clk] [get_bd_pins usbh_host_0/aclk]
@@ -613,16 +637,26 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets microblaze_0_axi_perip
   connect_bd_net -net usbh_host_0_utmi_reset [get_bd_ports utmi_reset_0] [get_bd_pins usbh_host_0/utmi_reset]
   connect_bd_net -net usbh_host_0_utmi_suspend_n [get_bd_ports utmi_suspend_n_0] [get_bd_pins usbh_host_0/utmi_suspend_n]
   connect_bd_net -net usbh_host_0_utmi_termsel [get_bd_ports utmi_termsel_0] [get_bd_pins usbh_host_0/utmi_termsel]
+  connect_bd_net -net usbh_host_0_utmi_txvalid [get_bd_ports utmi_txvalid_0] [get_bd_pins usbh_host_0/utmi_txvalid]
   connect_bd_net -net usbh_host_0_utmi_xcvrsel [get_bd_ports utmi_xcvrsel_0] [get_bd_pins usbh_host_0/utmi_xcvrsel]
   connect_bd_net -net utmi_hostdisc_0_1 [get_bd_ports utmi_hostdisc_0] [get_bd_pins usbh_host_0/utmi_hostdisc]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_hostdisc_0_1]
   connect_bd_net -net utmi_iddig_0_1 [get_bd_ports utmi_iddig_0] [get_bd_pins usbh_host_0/utmi_iddig]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_iddig_0_1]
   connect_bd_net -net utmi_linestate_0_1 [get_bd_ports utmi_linestate_0] [get_bd_pins usbh_host_0/utmi_linestate]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_linestate_0_1]
   connect_bd_net -net utmi_rxactive_0_1 [get_bd_ports utmi_rxactive_0] [get_bd_pins usbh_host_0/utmi_rxactive]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_rxactive_0_1]
   connect_bd_net -net utmi_rxerror_0_1 [get_bd_ports utmi_rxerror_0] [get_bd_pins usbh_host_0/utmi_rxerror]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_rxerror_0_1]
   connect_bd_net -net utmi_rxvalid_0_1 [get_bd_ports utmi_rxvalid_0] [get_bd_pins usbh_host_0/utmi_rxvalid]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_rxvalid_0_1]
   connect_bd_net -net utmi_sessend_0_1 [get_bd_ports utmi_sessend_0] [get_bd_pins usbh_host_0/utmi_sessend]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_sessend_0_1]
   connect_bd_net -net utmi_txready_0_1 [get_bd_ports utmi_txready_0] [get_bd_pins usbh_host_0/utmi_txready]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_txready_0_1]
   connect_bd_net -net utmi_vbusvalid_0_1 [get_bd_ports utmi_vbusvalid_0] [get_bd_pins usbh_host_0/utmi_vbusvalid]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_vbusvalid_0_1]
 
   # Create address segments
   create_bd_addr_seg -range 0x00010000 -offset 0x40E00000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_ethernetlite_0/S_AXI/Reg] SEG_axi_ethernetlite_0_Reg

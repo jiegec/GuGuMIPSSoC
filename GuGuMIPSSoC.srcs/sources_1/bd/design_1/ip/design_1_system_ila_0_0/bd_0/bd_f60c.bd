@@ -41,7 +41,7 @@
             "value_src": "default"
           },
           "CLK_DOMAIN": {
-            "value": "design_1_aclk_0",
+            "value": "design_1_utmi_clock_0",
             "value_src": "default_prop"
           },
           "DATA_WIDTH": {
@@ -163,7 +163,7 @@
             "value": "resetn"
           },
           "CLK_DOMAIN": {
-            "value": "design_1_aclk_0",
+            "value": "design_1_utmi_clock_0",
             "value_src": "default_prop"
           },
           "FREQ_HZ": {

@@ -88,12 +88,13 @@ int main()
   usbhw_reset();
 
   usb_init();
+  usleep(100000);
   xil_printf("Device detected, full: %d\r\n", usbhw_hub_full_speed_device());
   int res = usb_configure_device(&dev, 0);
   xil_printf("configure with res %d\r\n", res);
 
   while (1) {
-          usleep(1000000);
+          usleep(10000000);
           xil_printf("ctrl %08x\r\n", *USB_CTRL);
           xil_printf("status %08x\r\n", *USB_STATUS);
           xil_printf("stat %08x\r\n", *USB_RX_STAT);

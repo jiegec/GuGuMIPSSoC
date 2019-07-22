@@ -1,0 +1,166 @@
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[2]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[0]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[1]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[3]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[4]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[6]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[5]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[4]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[5]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[6]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_in[7]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[0]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[1]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[2]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[7]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_data_out[3]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_linestate[0]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_linestate[1]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_opmode[0]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_opmode[1]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_xcvrsel[0]}]
+set_property MARK_DEBUG true [get_nets {design_1_i/usbh_host_0/utmi_xcvrsel[1]}]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_data_t]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_dmpulldown]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_dppulldown]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_reset]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_rxactive]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_rxerror]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_rxvalid]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_termsel]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_txready]
+set_property MARK_DEBUG true [get_nets design_1_i/usbh_host_0/utmi_txvalid]
+
+
+connect_debug_port u_ila_0/probe2 [get_nets [list {design_1_i/usbh_host_0_utmi_opmode[0]} {design_1_i/usbh_host_0_utmi_opmode[1]}]]
+connect_debug_port u_ila_0/probe3 [get_nets [list {design_1_i/usbh_host_0_utmi_xcvrsel[0]} {design_1_i/usbh_host_0_utmi_xcvrsel[1]}]]
+connect_debug_port u_ila_0/probe8 [get_nets [list design_1_i/usbh_host_0_utmi_dmpulldown]]
+connect_debug_port u_ila_0/probe9 [get_nets [list design_1_i/usbh_host_0_utmi_dppulldown]]
+connect_debug_port u_ila_0/probe10 [get_nets [list design_1_i/usbh_host_0_utmi_reset]]
+connect_debug_port u_ila_0/probe11 [get_nets [list design_1_i/usbh_host_0_utmi_suspend_n]]
+connect_debug_port u_ila_0/probe12 [get_nets [list design_1_i/usbh_host_0_utmi_txvalid]]
+
+
+
+create_debug_core u_ila_0 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 8192 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list utmi_clock_0_IBUF]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+set_property port_width 2 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {design_1_i/usbh_host_0/utmi_linestate[0]} {design_1_i/usbh_host_0/utmi_linestate[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
+set_property port_width 8 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {design_1_i/usbh_host_0/utmi_data_out[0]} {design_1_i/usbh_host_0/utmi_data_out[1]} {design_1_i/usbh_host_0/utmi_data_out[2]} {design_1_i/usbh_host_0/utmi_data_out[3]} {design_1_i/usbh_host_0/utmi_data_out[4]} {design_1_i/usbh_host_0/utmi_data_out[5]} {design_1_i/usbh_host_0/utmi_data_out[6]} {design_1_i/usbh_host_0/utmi_data_out[7]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+set_property port_width 2 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {design_1_i/usbh_host_0/utmi_xcvrsel[0]} {design_1_i/usbh_host_0/utmi_xcvrsel[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
+set_property port_width 8 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list {design_1_i/usbh_host_0/utmi_data_in[0]} {design_1_i/usbh_host_0/utmi_data_in[1]} {design_1_i/usbh_host_0/utmi_data_in[2]} {design_1_i/usbh_host_0/utmi_data_in[3]} {design_1_i/usbh_host_0/utmi_data_in[4]} {design_1_i/usbh_host_0/utmi_data_in[5]} {design_1_i/usbh_host_0/utmi_data_in[6]} {design_1_i/usbh_host_0/utmi_data_in[7]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
+set_property port_width 2 [get_debug_ports u_ila_0/probe4]
+connect_debug_port u_ila_0/probe4 [get_nets [list {design_1_i/usbh_host_0/utmi_opmode[0]} {design_1_i/usbh_host_0/utmi_opmode[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
+set_property port_width 2 [get_debug_ports u_ila_0/probe5]
+connect_debug_port u_ila_0/probe5 [get_nets [list {design_1_i/utmi_linestate_0_1[0]} {design_1_i/utmi_linestate_0_1[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe6]
+set_property port_width 16 [get_debug_ports u_ila_0/probe6]
+connect_debug_port u_ila_0/probe6 [get_nets [list {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[0]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[1]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[2]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[3]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[4]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[5]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[6]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[7]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[8]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[9]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[10]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[11]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[12]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[13]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[14]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/c[15]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
+set_property port_width 8 [get_debug_ports u_ila_0/probe7]
+connect_debug_port u_ila_0/probe7 [get_nets [list {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[0]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[1]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[2]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[3]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[4]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[5]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[6]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/d[7]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe8]
+set_property port_width 16 [get_debug_ports u_ila_0/probe8]
+connect_debug_port u_ila_0/probe8 [get_nets [list {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[0]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[1]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[2]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[3]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[4]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[5]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[6]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[7]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[8]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[9]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[10]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[11]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[12]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[13]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[14]} {design_1_i/usbh_host_0/inst/usb_host_inst/u_sie/u_crc16/next_crc[15]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe9]
+set_property port_width 1 [get_debug_ports u_ila_0/probe9]
+connect_debug_port u_ila_0/probe9 [get_nets [list design_1_i/usbh_host_0/utmi_data_t]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe10]
+set_property port_width 1 [get_debug_ports u_ila_0/probe10]
+connect_debug_port u_ila_0/probe10 [get_nets [list design_1_i/usbh_host_0/utmi_dmpulldown]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe11]
+set_property port_width 1 [get_debug_ports u_ila_0/probe11]
+connect_debug_port u_ila_0/probe11 [get_nets [list design_1_i/usbh_host_0/utmi_dppulldown]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe12]
+set_property port_width 1 [get_debug_ports u_ila_0/probe12]
+connect_debug_port u_ila_0/probe12 [get_nets [list design_1_i/utmi_hostdisc_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe13]
+set_property port_width 1 [get_debug_ports u_ila_0/probe13]
+connect_debug_port u_ila_0/probe13 [get_nets [list design_1_i/utmi_iddig_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe14]
+set_property port_width 1 [get_debug_ports u_ila_0/probe14]
+connect_debug_port u_ila_0/probe14 [get_nets [list design_1_i/usbh_host_0/utmi_reset]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe15]
+set_property port_width 1 [get_debug_ports u_ila_0/probe15]
+connect_debug_port u_ila_0/probe15 [get_nets [list design_1_i/usbh_host_0/utmi_rxactive]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe16]
+set_property port_width 1 [get_debug_ports u_ila_0/probe16]
+connect_debug_port u_ila_0/probe16 [get_nets [list design_1_i/utmi_rxactive_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe17]
+set_property port_width 1 [get_debug_ports u_ila_0/probe17]
+connect_debug_port u_ila_0/probe17 [get_nets [list design_1_i/usbh_host_0/utmi_rxerror]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe18]
+set_property port_width 1 [get_debug_ports u_ila_0/probe18]
+connect_debug_port u_ila_0/probe18 [get_nets [list design_1_i/utmi_rxerror_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe19]
+set_property port_width 1 [get_debug_ports u_ila_0/probe19]
+connect_debug_port u_ila_0/probe19 [get_nets [list design_1_i/usbh_host_0/utmi_rxvalid]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe20]
+set_property port_width 1 [get_debug_ports u_ila_0/probe20]
+connect_debug_port u_ila_0/probe20 [get_nets [list design_1_i/utmi_rxvalid_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe21]
+set_property port_width 1 [get_debug_ports u_ila_0/probe21]
+connect_debug_port u_ila_0/probe21 [get_nets [list design_1_i/utmi_sessend_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe22]
+set_property port_width 1 [get_debug_ports u_ila_0/probe22]
+connect_debug_port u_ila_0/probe22 [get_nets [list design_1_i/usbh_host_0/utmi_termsel]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe23]
+set_property port_width 1 [get_debug_ports u_ila_0/probe23]
+connect_debug_port u_ila_0/probe23 [get_nets [list design_1_i/usbh_host_0/utmi_txready]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe24]
+set_property port_width 1 [get_debug_ports u_ila_0/probe24]
+connect_debug_port u_ila_0/probe24 [get_nets [list design_1_i/utmi_txready_0_1]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe25]
+set_property port_width 1 [get_debug_ports u_ila_0/probe25]
+connect_debug_port u_ila_0/probe25 [get_nets [list design_1_i/usbh_host_0/utmi_txvalid]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe26]
+set_property port_width 1 [get_debug_ports u_ila_0/probe26]
+connect_debug_port u_ila_0/probe26 [get_nets [list design_1_i/utmi_vbusvalid_0_1]]
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets utmi_clock_0_IBUF]
