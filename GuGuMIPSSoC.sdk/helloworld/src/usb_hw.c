@@ -476,7 +476,7 @@ int usbhw_reset(void)
     LOG(USBLOG_INFO, ("HW: Device detected\n"));
 
     // Enable SOF
-    usbhw_hub_enable(usbhw_hub_full_speed_device(), 0);
+    usbhw_hub_enable(usbhw_hub_full_speed_device(), 1);
     usbhw_timer_sleep(3);
 #endif
 }
