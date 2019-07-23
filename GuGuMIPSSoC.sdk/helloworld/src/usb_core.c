@@ -590,6 +590,24 @@ int usb_configure_device(struct usb_device *dev, int device_address)
         return 0;
     }
 
+    // Get full configuration descriptor (configuration 0)
+    conf_desc = (struct UsbConfigurationDescriptor *)&_desc_buffer[0];
+    res = usb_get_descriptor(dev, DESC_CONFIGURATION, 0, _desc_buffer, USB_BYTE_SWAP16(conf_desc->wTotalLength));
+    if (res < 0)
+    {
+        USBLOG(USBLOG_ERR, ("Fetch DESC_CONF failed\n"));
+        return 0;
+    }
+
+    USBLOG(USBLOG_ENUM, ("Configuration VID=%04x PID=%04x:\n", dev->vid, dev->pid));
+    USBLOG(USBLOG_ENUM, ("  wTotalLength=%d\n", USB_BYTE_SWAP16(conf_desc->wTotalLength)));
+    USBLOG(USBLOG_ENUM, ("  bNumInterfaces=%d\n", conf_desc->bNumInterfaces));
+    USBLOG(USBLOG_ENUM,
+           ("  bConfigurationValue=%d\n", conf_desc->bConfigurationValue));
+    USBLOG(USBLOG_ENUM, ("  iConfiguration=%d\n", conf_desc->iConfiguration));
+    USBLOG(USBLOG_ENUM, ("  bmAttributes=%x\n", conf_desc->bmAttributes));
+    USBLOG(USBLOG_ENUM, ("  bMaxPower=%d\n", conf_desc->bMaxPower));
+
     // Select configuration
     res = usb_set_configuration(dev, conf_desc->bConfigurationValue);
     if (!res)
