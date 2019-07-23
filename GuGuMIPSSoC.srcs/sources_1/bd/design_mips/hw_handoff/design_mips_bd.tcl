@@ -317,13 +317,41 @@ proc create_root_design { parentCell } {
   set ps2_dat [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 ps2_dat ]
   set spi [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:spi_rtl:1.0 spi ]
   set uart [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 uart ]
+  set utmi_data_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 utmi_data_0 ]
 
   # Create ports
   set clk [ create_bd_port -dir I -type clk clk ]
   set_property -dict [ list \
    CONFIG.ASSOCIATED_RESET {resetn} \
  ] $clk
+  set led [ create_bd_port -dir O -from 15 -to 0 led ]
+  set led_rg0 [ create_bd_port -dir O -from 1 -to 0 led_rg0 ]
+  set led_rg1 [ create_bd_port -dir O -from 1 -to 0 led_rg1 ]
   set resetn [ create_bd_port -dir I -type rst resetn ]
+  set utmi_chrgvbus_0 [ create_bd_port -dir O utmi_chrgvbus_0 ]
+  set utmi_clock_0 [ create_bd_port -dir I -type clk utmi_clock_0 ]
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {60000000} \
+ ] $utmi_clock_0
+  set utmi_dischrgvbus_0 [ create_bd_port -dir O utmi_dischrgvbus_0 ]
+  set utmi_dmpulldown_0 [ create_bd_port -dir O utmi_dmpulldown_0 ]
+  set utmi_dppulldown_0 [ create_bd_port -dir O utmi_dppulldown_0 ]
+  set utmi_hostdisc_0 [ create_bd_port -dir I utmi_hostdisc_0 ]
+  set utmi_iddig_0 [ create_bd_port -dir I utmi_iddig_0 ]
+  set utmi_idpullup_0 [ create_bd_port -dir O utmi_idpullup_0 ]
+  set utmi_linestate_0 [ create_bd_port -dir I -from 1 -to 0 utmi_linestate_0 ]
+  set utmi_opmode_0 [ create_bd_port -dir O -from 1 -to 0 utmi_opmode_0 ]
+  set utmi_reset_0 [ create_bd_port -dir O -type rst utmi_reset_0 ]
+  set utmi_rxactive_0 [ create_bd_port -dir I utmi_rxactive_0 ]
+  set utmi_rxerror_0 [ create_bd_port -dir I utmi_rxerror_0 ]
+  set utmi_rxvalid_0 [ create_bd_port -dir I utmi_rxvalid_0 ]
+  set utmi_sessend_0 [ create_bd_port -dir I utmi_sessend_0 ]
+  set utmi_suspend_n_0 [ create_bd_port -dir O utmi_suspend_n_0 ]
+  set utmi_termsel_0 [ create_bd_port -dir O utmi_termsel_0 ]
+  set utmi_txready_0 [ create_bd_port -dir I utmi_txready_0 ]
+  set utmi_txvalid_0 [ create_bd_port -dir O utmi_txvalid_0 ]
+  set utmi_vbusvalid_0 [ create_bd_port -dir I utmi_vbusvalid_0 ]
+  set utmi_xcvrsel_0 [ create_bd_port -dir O -from 1 -to 0 utmi_xcvrsel_0 ]
 
   # Create instance: altera_up_ps2_0, and set properties
   set altera_up_ps2_0 [ create_bd_cell -type ip -vlnv user.org:user:altera_up_ps2:1.2 altera_up_ps2_0 ]
@@ -353,7 +381,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi_mem_intercon, and set properties
   set axi_mem_intercon [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {8} \
+   CONFIG.NUM_MI {10} \
    CONFIG.NUM_SI {1} \
  ] $axi_mem_intercon
 
@@ -418,6 +446,9 @@ proc create_root_design { parentCell } {
    CONFIG.RESET_TYPE {ACTIVE_LOW} \
  ] $clk_wiz_0
 
+  # Create instance: confreg_0, and set properties
+  set confreg_0 [ create_bd_cell -type ip -vlnv user.org:user:confreg:1.0 confreg_0 ]
+
   # Create instance: mig_7series_0, and set properties
   set mig_7series_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.2 mig_7series_0 ]
 
@@ -447,6 +478,9 @@ proc create_root_design { parentCell } {
   
   # Create instance: rst_mig_7series_0_cpu, and set properties
   set rst_mig_7series_0_cpu [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_mig_7series_0_cpu ]
+
+  # Create instance: rst_utmi_clock_0_60M, and set properties
+  set rst_utmi_clock_0_60M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_utmi_clock_0_60M ]
 
   # Create instance: system_ila_0, and set properties
   set system_ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0 ]
@@ -483,6 +517,9 @@ proc create_root_design { parentCell } {
    CONFIG.C_SLOT_1_INTF_TYPE {xilinx.com:interface:aximm_rtl:1.0} \
  ] $system_ila_0
 
+  # Create instance: usbh_host_0, and set properties
+  set usbh_host_0 [ create_bd_cell -type ip -vlnv user.org:user:usbh_host:1.3 usbh_host_0 ]
+
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
@@ -491,10 +528,24 @@ proc create_root_design { parentCell } {
    CONFIG.LOGO_FILE {data/sym_notgate.png} \
  ] $util_vector_logic_0
 
+  # Create instance: util_vector_logic_1, and set properties
+  set util_vector_logic_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_1 ]
+  set_property -dict [ list \
+   CONFIG.C_SIZE {1} \
+ ] $util_vector_logic_1
+
+  # Create instance: vio_0, and set properties
+  set vio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:vio:3.0 vio_0 ]
+  set_property -dict [ list \
+   CONFIG.C_EN_PROBE_IN_ACTIVITY {0} \
+   CONFIG.C_NUM_PROBE_IN {0} \
+   CONFIG.C_PROBE_OUT0_INIT_VAL {0x1} \
+ ] $vio_0
+
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
   set_property -dict [ list \
-   CONFIG.NUM_PORTS {4} \
+   CONFIG.NUM_PORTS {5} \
  ] $xlconcat_0
 
   # Create instance: xlconstant_0, and set properties
@@ -517,6 +568,8 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_mem_intercon_M05_AXI [get_bd_intf_pins axi_mem_intercon/M05_AXI] [get_bd_intf_pins axi_quad_spi_0/AXI_LITE]
   connect_bd_intf_net -intf_net axi_mem_intercon_M06_AXI [get_bd_intf_pins axi_mem_intercon/M06_AXI] [get_bd_intf_pins axi_quad_spi_0/AXI_FULL]
   connect_bd_intf_net -intf_net axi_mem_intercon_M07_AXI [get_bd_intf_pins axi_apb_bridge_0/AXI4_LITE] [get_bd_intf_pins axi_mem_intercon/M07_AXI]
+  connect_bd_intf_net -intf_net axi_mem_intercon_M08_AXI [get_bd_intf_pins axi_mem_intercon/M08_AXI] [get_bd_intf_pins usbh_host_0/cfg]
+  connect_bd_intf_net -intf_net axi_mem_intercon_M09_AXI [get_bd_intf_pins axi_mem_intercon/M09_AXI] [get_bd_intf_pins confreg_0/S00_AXI]
   connect_bd_intf_net -intf_net axi_quad_spi_0_SPI_0 [get_bd_intf_ports spi] [get_bd_intf_pins axi_quad_spi_0/SPI_0]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_bram_ctrl_0/S_AXI] [get_bd_intf_pins axi_mem_intercon/M00_AXI]
 connect_bd_intf_net -intf_net [get_bd_intf_nets axi_smc_M00_AXI] [get_bd_intf_pins axi_mem_intercon/M00_AXI] [get_bd_intf_pins system_ila_0/SLOT_1_AXI]
@@ -526,18 +579,23 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets axi_smc_M00_AXI]
   connect_bd_intf_net -intf_net mycpu_top_0_interface_aximm [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins mycpu_top_0/interface_aximm]
 connect_bd_intf_net -intf_net [get_bd_intf_nets mycpu_top_0_interface_aximm] [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins system_ila_0/SLOT_0_AXI]
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_aximm]
+  connect_bd_intf_net -intf_net usbh_host_0_utmi_data [get_bd_intf_ports utmi_data_0] [get_bd_intf_pins usbh_host_0/utmi_data]
 
   # Create port connections
   connect_bd_net -net ARESETN_1 [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins rst_mig_7series_0_cpu/interconnect_aresetn]
+  connect_bd_net -net aclk_0_1 [get_bd_ports utmi_clock_0] [get_bd_pins axi_mem_intercon/M08_ACLK] [get_bd_pins rst_utmi_clock_0_60M/slowest_sync_clk] [get_bd_pins usbh_host_0/aclk]
   connect_bd_net -net altera_up_ps2_0_irq [get_bd_pins altera_up_ps2_0/irq] [get_bd_pins xlconcat_0/In3]
   connect_bd_net -net axi_ethernetlite_0_ip2intc_irpt [get_bd_pins axi_ethernetlite_0/ip2intc_irpt] [get_bd_pins xlconcat_0/In2]
   connect_bd_net -net axi_intc_0_irq [get_bd_pins axi_intc_0/irq] [get_bd_pins mycpu_top_0/int]
   connect_bd_net -net axi_quad_spi_0_ip2intc_irpt [get_bd_pins axi_quad_spi_0/ip2intc_irpt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net axi_uartlite_0_interrupt [get_bd_pins axi_uartlite_0/interrupt] [get_bd_pins xlconcat_0/In1]
-  connect_bd_net -net clk_in1_0_1 [get_bd_ports clk] [get_bd_pins clk_wiz_0/clk_in1]
+  connect_bd_net -net clk_in1_0_1 [get_bd_ports clk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins vio_0/clk]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axi_quad_spi_0/ext_spi_clk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins mig_7series_0/sys_clk_i]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins mig_7series_0/clk_ref_i]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins mig_7series_0/sys_rst]
+  connect_bd_net -net confreg_0_led [get_bd_ports led] [get_bd_pins confreg_0/led]
+  connect_bd_net -net confreg_0_led_rg0 [get_bd_ports led_rg0] [get_bd_pins confreg_0/led_rg0]
+  connect_bd_net -net confreg_0_led_rg1 [get_bd_ports led_rg1] [get_bd_pins confreg_0/led_rg1]
   connect_bd_net -net debug_wb_pc [get_bd_pins mycpu_top_0/debug_wb_pc] [get_bd_pins system_ila_0/probe0]
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_pc]
   connect_bd_net -net debug_wb_rf_wen [get_bd_pins mycpu_top_0/debug_wb_rf_wen] [get_bd_pins system_ila_0/probe1]
@@ -545,12 +603,36 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wen]
   connect_bd_net -net debug_wb_rf_wnum [get_bd_pins mycpu_top_0/debug_wb_rf_wnum] [get_bd_pins system_ila_0/probe2]
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wnum]
   connect_bd_net -net mig_7series_0_mmcm_locked [get_bd_pins mig_7series_0/mmcm_locked] [get_bd_pins rst_mig_7series_0_cpu/dcm_locked]
-  connect_bd_net -net mig_7series_0_ui_addn_clk_0 [get_bd_pins altera_up_ps2_0/clk] [get_bd_pins axi_apb_bridge_0/s_axi_aclk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/M01_ACLK] [get_bd_pins axi_mem_intercon/M03_ACLK] [get_bd_pins axi_mem_intercon/M04_ACLK] [get_bd_pins axi_mem_intercon/M05_ACLK] [get_bd_pins axi_mem_intercon/M06_ACLK] [get_bd_pins axi_mem_intercon/M07_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_quad_spi_0/s_axi4_aclk] [get_bd_pins axi_quad_spi_0/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins mig_7series_0/ui_addn_clk_0] [get_bd_pins mycpu_top_0/aclk] [get_bd_pins rst_mig_7series_0_cpu/slowest_sync_clk] [get_bd_pins system_ila_0/clk]
+  connect_bd_net -net mig_7series_0_ui_addn_clk_0 [get_bd_pins altera_up_ps2_0/clk] [get_bd_pins axi_apb_bridge_0/s_axi_aclk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/M01_ACLK] [get_bd_pins axi_mem_intercon/M03_ACLK] [get_bd_pins axi_mem_intercon/M04_ACLK] [get_bd_pins axi_mem_intercon/M05_ACLK] [get_bd_pins axi_mem_intercon/M06_ACLK] [get_bd_pins axi_mem_intercon/M07_ACLK] [get_bd_pins axi_mem_intercon/M09_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_quad_spi_0/s_axi4_aclk] [get_bd_pins axi_quad_spi_0/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins confreg_0/s00_axi_aclk] [get_bd_pins mig_7series_0/ui_addn_clk_0] [get_bd_pins mycpu_top_0/aclk] [get_bd_pins rst_mig_7series_0_cpu/slowest_sync_clk] [get_bd_pins system_ila_0/clk]
   connect_bd_net -net mig_7series_0_ui_clk [get_bd_pins axi_mem_intercon/M02_ACLK] [get_bd_pins mig_7series_0/ui_clk]
-  connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins rst_mig_7series_0_cpu/ext_reset_in]
-  connect_bd_net -net rst_mig_7series_0_100M_peripheral_aresetn [get_bd_pins altera_up_ps2_0/reset_n] [get_bd_pins axi_apb_bridge_0/s_axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn] [get_bd_pins axi_ethernetlite_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/M01_ARESETN] [get_bd_pins axi_mem_intercon/M02_ARESETN] [get_bd_pins axi_mem_intercon/M03_ARESETN] [get_bd_pins axi_mem_intercon/M04_ARESETN] [get_bd_pins axi_mem_intercon/M05_ARESETN] [get_bd_pins axi_mem_intercon/M06_ARESETN] [get_bd_pins axi_mem_intercon/M07_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_quad_spi_0/s_axi4_aresetn] [get_bd_pins axi_quad_spi_0/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_mig_7series_0_cpu/peripheral_aresetn] [get_bd_pins system_ila_0/resetn]
+  connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins util_vector_logic_1/Op1]
+  connect_bd_net -net rst_mig_7series_0_100M_peripheral_aresetn [get_bd_pins altera_up_ps2_0/reset_n] [get_bd_pins axi_apb_bridge_0/s_axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn] [get_bd_pins axi_ethernetlite_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/M01_ARESETN] [get_bd_pins axi_mem_intercon/M02_ARESETN] [get_bd_pins axi_mem_intercon/M03_ARESETN] [get_bd_pins axi_mem_intercon/M04_ARESETN] [get_bd_pins axi_mem_intercon/M05_ARESETN] [get_bd_pins axi_mem_intercon/M06_ARESETN] [get_bd_pins axi_mem_intercon/M07_ARESETN] [get_bd_pins axi_mem_intercon/M09_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_quad_spi_0/s_axi4_aresetn] [get_bd_pins axi_quad_spi_0/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins confreg_0/s00_axi_aresetn] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_mig_7series_0_cpu/peripheral_aresetn] [get_bd_pins rst_utmi_clock_0_60M/ext_reset_in] [get_bd_pins system_ila_0/resetn]
   connect_bd_net -net rst_mig_7series_0_cpu_mb_reset [get_bd_pins rst_mig_7series_0_cpu/mb_reset] [get_bd_pins util_vector_logic_0/Op1]
+  connect_bd_net -net rst_utmi_clock_0_60M_peripheral_aresetn [get_bd_pins axi_mem_intercon/M08_ARESETN] [get_bd_pins rst_utmi_clock_0_60M/peripheral_aresetn] [get_bd_pins usbh_host_0/aresetn]
+  connect_bd_net -net usbh_host_0_intr [get_bd_pins usbh_host_0/intr] [get_bd_pins xlconcat_0/In4]
+  connect_bd_net -net usbh_host_0_utmi_chrgvbus [get_bd_ports utmi_chrgvbus_0] [get_bd_pins usbh_host_0/utmi_chrgvbus]
+  connect_bd_net -net usbh_host_0_utmi_dischrgvbus [get_bd_ports utmi_dischrgvbus_0] [get_bd_pins usbh_host_0/utmi_dischrgvbus]
+  connect_bd_net -net usbh_host_0_utmi_dmpulldown [get_bd_ports utmi_dmpulldown_0] [get_bd_pins usbh_host_0/utmi_dmpulldown]
+  connect_bd_net -net usbh_host_0_utmi_dppulldown [get_bd_ports utmi_dppulldown_0] [get_bd_pins usbh_host_0/utmi_dppulldown]
+  connect_bd_net -net usbh_host_0_utmi_idpullup [get_bd_ports utmi_idpullup_0] [get_bd_pins usbh_host_0/utmi_idpullup]
+  connect_bd_net -net usbh_host_0_utmi_opmode [get_bd_ports utmi_opmode_0] [get_bd_pins usbh_host_0/utmi_opmode]
+  connect_bd_net -net usbh_host_0_utmi_reset [get_bd_ports utmi_reset_0] [get_bd_pins usbh_host_0/utmi_reset]
+  connect_bd_net -net usbh_host_0_utmi_suspend_n [get_bd_ports utmi_suspend_n_0] [get_bd_pins usbh_host_0/utmi_suspend_n]
+  connect_bd_net -net usbh_host_0_utmi_termsel [get_bd_ports utmi_termsel_0] [get_bd_pins usbh_host_0/utmi_termsel]
+  connect_bd_net -net usbh_host_0_utmi_txvalid [get_bd_ports utmi_txvalid_0] [get_bd_pins usbh_host_0/utmi_txvalid]
+  connect_bd_net -net usbh_host_0_utmi_xcvrsel [get_bd_ports utmi_xcvrsel_0] [get_bd_pins usbh_host_0/utmi_xcvrsel]
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins mycpu_top_0/aresetn] [get_bd_pins util_vector_logic_0/Res]
+  connect_bd_net -net util_vector_logic_1_Res [get_bd_pins rst_mig_7series_0_cpu/ext_reset_in] [get_bd_pins util_vector_logic_1/Res]
+  connect_bd_net -net utmi_hostdisc_0_1 [get_bd_ports utmi_hostdisc_0] [get_bd_pins usbh_host_0/utmi_hostdisc]
+  connect_bd_net -net utmi_iddig_0_1 [get_bd_ports utmi_iddig_0] [get_bd_pins usbh_host_0/utmi_iddig]
+  connect_bd_net -net utmi_linestate_0_1 [get_bd_ports utmi_linestate_0] [get_bd_pins usbh_host_0/utmi_linestate]
+  connect_bd_net -net utmi_rxactive_0_1 [get_bd_ports utmi_rxactive_0] [get_bd_pins usbh_host_0/utmi_rxactive]
+  connect_bd_net -net utmi_rxerror_0_1 [get_bd_ports utmi_rxerror_0] [get_bd_pins usbh_host_0/utmi_rxerror]
+  connect_bd_net -net utmi_rxvalid_0_1 [get_bd_ports utmi_rxvalid_0] [get_bd_pins usbh_host_0/utmi_rxvalid]
+  connect_bd_net -net utmi_sessend_0_1 [get_bd_ports utmi_sessend_0] [get_bd_pins usbh_host_0/utmi_sessend]
+  connect_bd_net -net utmi_txready_0_1 [get_bd_ports utmi_txready_0] [get_bd_pins usbh_host_0/utmi_txready]
+  connect_bd_net -net utmi_vbusvalid_0_1 [get_bd_ports utmi_vbusvalid_0] [get_bd_pins usbh_host_0/utmi_vbusvalid]
+  connect_bd_net -net vio_0_probe_out0 [get_bd_pins util_vector_logic_1/Op2] [get_bd_pins vio_0/probe_out0]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc_0/intr] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins clk_wiz_0/resetn] [get_bd_pins xlconstant_0/dout]
 
@@ -562,7 +644,9 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wnum]
   create_bd_addr_seg -range 0x00010000 -offset 0x1F900000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs axi_quad_spi_0/aximm/MEM0] SEG_axi_quad_spi_0_MEM0
   create_bd_addr_seg -range 0x00010000 -offset 0x1FA00000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x1FD00000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs axi_uartlite_0/S_AXI/Reg] SEG_axi_uartlite_0_Reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x1F700000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs confreg_0/S00_AXI/S00_AXI_reg] SEG_confreg_0_S00_AXI_reg
   create_bd_addr_seg -range 0x08000000 -offset 0x00000000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs mig_7series_0/memmap/memaddr] SEG_mig_7series_0_memaddr
+  create_bd_addr_seg -range 0x00010000 -offset 0x1E000000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs usbh_host_0/cfg/reg0] SEG_usbh_host_0_reg0
 
 
   # Restore current instance

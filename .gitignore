@@ -80,4 +80,5 @@
 *.cache/
 *.ip_user_files/
 *.hw/
+*.tmp/
 .Xil/
