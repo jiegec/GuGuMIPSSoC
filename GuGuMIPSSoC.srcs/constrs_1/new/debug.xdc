@@ -30,6 +30,93 @@ set_property MARK_DEBUG true [get_nets design_mips_i/usbh_host_0/utmi_rxvalid]
 set_property MARK_DEBUG true [get_nets design_mips_i/usbh_host_0/utmi_termsel]
 set_property MARK_DEBUG true [get_nets design_mips_i/usbh_host_0/utmi_txready]
 set_property MARK_DEBUG true [get_nets design_mips_i/usbh_host_0/utmi_txvalid]
+
+create_debug_core u_ila_0 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list utmi_clock_0_IBUF]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+set_property port_width 2 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {design_mips_i/usbh_host_0/utmi_linestate[0]} {design_mips_i/usbh_host_0/utmi_linestate[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
+set_property port_width 32 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[0]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[1]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[2]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[3]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[4]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[5]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[6]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[7]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[8]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[9]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[10]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[11]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[12]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[13]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[14]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[15]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[16]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[17]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[18]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[19]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[20]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[21]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[22]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[23]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[24]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[25]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[26]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[27]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[28]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[29]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[30]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_q[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+set_property port_width 8 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {design_mips_i/usbh_host_0/utmi_data_in[0]} {design_mips_i/usbh_host_0/utmi_data_in[1]} {design_mips_i/usbh_host_0/utmi_data_in[2]} {design_mips_i/usbh_host_0/utmi_data_in[3]} {design_mips_i/usbh_host_0/utmi_data_in[4]} {design_mips_i/usbh_host_0/utmi_data_in[5]} {design_mips_i/usbh_host_0/utmi_data_in[6]} {design_mips_i/usbh_host_0/utmi_data_in[7]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
+set_property port_width 2 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list {design_mips_i/usbh_host_0/utmi_xcvrsel[0]} {design_mips_i/usbh_host_0/utmi_xcvrsel[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
+set_property port_width 32 [get_debug_ports u_ila_0/probe4]
+connect_debug_port u_ila_0/probe4 [get_nets [list {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[0]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[1]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[2]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[3]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[4]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[5]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[6]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[7]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[8]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[9]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[10]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[11]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[12]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[13]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[14]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[15]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[16]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[17]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[18]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[19]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[20]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[21]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[22]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[23]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[24]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[25]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[26]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[27]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[28]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[29]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[30]} {design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_q[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
+set_property port_width 8 [get_debug_ports u_ila_0/probe5]
+connect_debug_port u_ila_0/probe5 [get_nets [list {design_mips_i/usbh_host_0/utmi_data_out[0]} {design_mips_i/usbh_host_0/utmi_data_out[1]} {design_mips_i/usbh_host_0/utmi_data_out[2]} {design_mips_i/usbh_host_0/utmi_data_out[3]} {design_mips_i/usbh_host_0/utmi_data_out[4]} {design_mips_i/usbh_host_0/utmi_data_out[5]} {design_mips_i/usbh_host_0/utmi_data_out[6]} {design_mips_i/usbh_host_0/utmi_data_out[7]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe6]
+set_property port_width 2 [get_debug_ports u_ila_0/probe6]
+connect_debug_port u_ila_0/probe6 [get_nets [list {design_mips_i/usbh_host_0/utmi_opmode[0]} {design_mips_i/usbh_host_0/utmi_opmode[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
+set_property port_width 1 [get_debug_ports u_ila_0/probe7]
+connect_debug_port u_ila_0/probe7 [get_nets [list design_mips_i/usbh_host_0/utmi_data_t]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe8]
+set_property port_width 1 [get_debug_ports u_ila_0/probe8]
+connect_debug_port u_ila_0/probe8 [get_nets [list design_mips_i/usbh_host_0/utmi_dmpulldown]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe9]
+set_property port_width 1 [get_debug_ports u_ila_0/probe9]
+connect_debug_port u_ila_0/probe9 [get_nets [list design_mips_i/usbh_host_0/utmi_dppulldown]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe10]
+set_property port_width 1 [get_debug_ports u_ila_0/probe10]
+connect_debug_port u_ila_0/probe10 [get_nets [list design_mips_i/usbh_host_0/utmi_reset]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe11]
+set_property port_width 1 [get_debug_ports u_ila_0/probe11]
+connect_debug_port u_ila_0/probe11 [get_nets [list design_mips_i/usbh_host_0/utmi_rxactive]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe12]
+set_property port_width 1 [get_debug_ports u_ila_0/probe12]
+connect_debug_port u_ila_0/probe12 [get_nets [list design_mips_i/usbh_host_0/utmi_rxerror]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe13]
+set_property port_width 1 [get_debug_ports u_ila_0/probe13]
+connect_debug_port u_ila_0/probe13 [get_nets [list design_mips_i/usbh_host_0/utmi_rxvalid]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe14]
+set_property port_width 1 [get_debug_ports u_ila_0/probe14]
+connect_debug_port u_ila_0/probe14 [get_nets [list design_mips_i/usbh_host_0/utmi_termsel]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe15]
+set_property port_width 1 [get_debug_ports u_ila_0/probe15]
+connect_debug_port u_ila_0/probe15 [get_nets [list design_mips_i/usbh_host_0/utmi_txready]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe16]
+set_property port_width 1 [get_debug_ports u_ila_0/probe16]
+connect_debug_port u_ila_0/probe16 [get_nets [list design_mips_i/usbh_host_0/utmi_txvalid]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe17]
+set_property port_width 1 [get_debug_ports u_ila_0/probe17]
+connect_debug_port u_ila_0/probe17 [get_nets [list design_mips_i/usbh_host_0/inst/usb_host_inst/wr_addr_valid_q]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe18]
+set_property port_width 1 [get_debug_ports u_ila_0/probe18]
+connect_debug_port u_ila_0/probe18 [get_nets [list design_mips_i/usbh_host_0/inst/usb_host_inst/wr_data_valid_q]]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]

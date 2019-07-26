@@ -111,10 +111,30 @@ set_output_delay -clock [get_clocks utmi_clk] -min -add_delay 0.000 [get_ports u
 set_output_delay -clock [get_clocks utmi_clk] -max -add_delay 2.000 [get_ports utmi_txvalid_0]
 
 # spi flash
-set_property -dict {PACKAGE_PIN P20 IOSTANDARD LVCMOS33} [get_ports spi_sck_io]
-set_property -dict {PACKAGE_PIN R20 IOSTANDARD LVCMOS33} [get_ports {spi_ss_io[0]}]
-set_property -dict {PACKAGE_PIN N18 IOSTANDARD LVCMOS33} [get_ports spi_io0_io]
-set_property -dict {PACKAGE_PIN P19 IOSTANDARD LVCMOS33} [get_ports spi_io1_io]
+set_property -dict {PACKAGE_PIN P20 IOSTANDARD LVCMOS33} [get_ports spi_flash_sck_io]
+set_property -dict {PACKAGE_PIN R20 IOSTANDARD LVCMOS33} [get_ports {spi_flash_ss_io[0]}]
+set_property -dict {PACKAGE_PIN N18 IOSTANDARD LVCMOS33} [get_ports spi_flash_io0_io]
+set_property -dict {PACKAGE_PIN P19 IOSTANDARD LVCMOS33} [get_ports spi_flash_io1_io]
+set_property -dict {PACKAGE_PIN R18 IOSTANDARD LVCMOS33} [get_ports spi_flash_io2_io]
+set_property -dict {PACKAGE_PIN R21 IOSTANDARD LVCMOS33} [get_ports spi_flash_io3_io]
+
+# cfg flash
+set_property -dict {PACKAGE_PIN P18 IOSTANDARD LVCMOS33} [get_ports {cfg_flash_ss_io[0]}]
+set_property -dict {PACKAGE_PIN R14 IOSTANDARD LVCMOS33} [get_ports cfg_flash_io0_io]
+set_property -dict {PACKAGE_PIN R15 IOSTANDARD LVCMOS33} [get_ports cfg_flash_io1_io]
+
+# flash timing
+set_max_delay 1.5 -from [get_pins -hier *SCK_O_reg_reg/C] -to [get_pins -hier *USRCCLKO] -datapath_only
+set_min_delay 0.1 -from [get_pins -hier *SCK_O_reg_reg/C] -to [get_pins -hier *USRCCLKO]
+create_generated_clock -name clk_sck -source [get_pins -hierarchical *axi_cfg_spi_0/ext_spi_clk] [get_pins -hierarchical *USRCCLKO] -edges {3 5 7} -edge_shift {7.500 7.500 7.500} 
+set_input_delay -clock clk_sck -max 8.100 [get_ports cfg_flash_io*_io] -clock_fall
+set_input_delay -clock clk_sck -min 2.450 [get_ports cfg_flash_io*_io] -clock_fall
+set_multicycle_path 2 -setup -from clk_sck -to [get_clocks -of_objects [get_pins -hierarchical */ext_spi_clk]]
+set_multicycle_path 1 -hold -end -from clk_sck -to [get_clocks -of_objects [get_pins -hierarchical */ext_spi_clk]]
+set_output_delay -clock clk_sck -max 3.050 [get_ports cfg_flash_io*_io]
+set_output_delay -clock clk_sck -min -2.950 [get_ports cfg_flash_io*_io]
+set_multicycle_path 2 -setup -start -from [get_clocks -of_objects [get_pins -hierarchical */ext_spi_clk]] -to clk_sck
+set_multicycle_path 1 -hold -from [get_clocks -of_objects [get_pins -hierarchical */ext_spi_clk]] -to clk_sck
 
 # ps/2
 set_property -dict {PACKAGE_PIN AD1 IOSTANDARD LVCMOS33} [get_ports ps2_dat_tri_io]
