@@ -311,6 +311,7 @@ proc create_root_design { parentCell } {
 
   # Create interface ports
   set DDR3_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DDR3_0 ]
+  set LCD_data_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 LCD_data_0 ]
   set cfg_flash [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:spi_rtl:1.0 cfg_flash ]
   set mdio [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:mdio_rtl:1.0 mdio ]
   set mii [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:mii_rtl:1.0 mii ]
@@ -321,6 +322,11 @@ proc create_root_design { parentCell } {
   set utmi_data_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 utmi_data_0 ]
 
   # Create ports
+  set LCD_csel_0 [ create_bd_port -dir O LCD_csel_0 ]
+  set LCD_nrst_0 [ create_bd_port -dir O LCD_nrst_0 ]
+  set LCD_rd_0 [ create_bd_port -dir O LCD_rd_0 ]
+  set LCD_rs_0 [ create_bd_port -dir O LCD_rs_0 ]
+  set LCD_wr_0 [ create_bd_port -dir O LCD_wr_0 ]
   set clk [ create_bd_port -dir I -type clk clk ]
   set_property -dict [ list \
    CONFIG.ASSOCIATED_RESET {resetn} \
@@ -366,6 +372,13 @@ proc create_root_design { parentCell } {
    CONFIG.C_APB_NUM_SLAVES {1} \
    CONFIG.C_M_APB_PROTOCOL {apb4} \
  ] $axi_apb_bridge_0
+
+  # Create instance: axi_apb_bridge_1, and set properties
+  set axi_apb_bridge_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_apb_bridge:3.0 axi_apb_bridge_1 ]
+  set_property -dict [ list \
+   CONFIG.C_APB_NUM_SLAVES {1} \
+   CONFIG.C_M_APB_PROTOCOL {apb4} \
+ ] $axi_apb_bridge_1
 
   # Create instance: axi_bram_ctrl_0, and set properties
   set axi_bram_ctrl_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_bram_ctrl:4.1 axi_bram_ctrl_0 ]
@@ -498,6 +511,9 @@ proc create_root_design { parentCell } {
      return 1
    }
   
+  # Create instance: nt35510_apb_adapter_0, and set properties
+  set nt35510_apb_adapter_0 [ create_bd_cell -type ip -vlnv user.org:user:nt35510_apb_adapter:1.0 nt35510_apb_adapter_0 ]
+
   # Create instance: rst_mig_7series_0_cpu, and set properties
   set rst_mig_7series_0_cpu [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_mig_7series_0_cpu ]
 
@@ -580,6 +596,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net altera_up_ps2_0_ps2_clk [get_bd_intf_ports ps2_clk] [get_bd_intf_pins altera_up_ps2_0/ps2_clk]
   connect_bd_intf_net -intf_net altera_up_ps2_0_ps2_dat [get_bd_intf_ports ps2_dat] [get_bd_intf_pins altera_up_ps2_0/ps2_dat]
   connect_bd_intf_net -intf_net axi_apb_bridge_0_APB_M [get_bd_intf_pins altera_up_ps2_0/APB] [get_bd_intf_pins axi_apb_bridge_0/APB_M]
+  connect_bd_intf_net -intf_net axi_apb_bridge_1_APB_M [get_bd_intf_pins axi_apb_bridge_1/APB_M] [get_bd_intf_pins nt35510_apb_adapter_0/APB]
   connect_bd_intf_net -intf_net axi_bram_ctrl_0_BRAM_PORTA [get_bd_intf_pins axi_bram_ctrl_0/BRAM_PORTA] [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTA]
   connect_bd_intf_net -intf_net axi_ethernetlite_0_MDIO [get_bd_intf_ports mdio] [get_bd_intf_pins axi_ethernetlite_0/MDIO]
   connect_bd_intf_net -intf_net axi_ethernetlite_0_MII [get_bd_intf_ports mii] [get_bd_intf_pins axi_ethernetlite_0/MII]
@@ -593,6 +610,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_mem_intercon_M08_AXI [get_bd_intf_pins axi_mem_intercon/M08_AXI] [get_bd_intf_pins usbh_host_0/cfg]
   connect_bd_intf_net -intf_net axi_mem_intercon_M09_AXI [get_bd_intf_pins axi_mem_intercon/M09_AXI] [get_bd_intf_pins confreg_0/S00_AXI]
   connect_bd_intf_net -intf_net axi_mem_intercon_M10_AXI [get_bd_intf_pins axi_mem_intercon/M10_AXI] [get_bd_intf_pins axi_quad_spi_1/AXI_LITE]
+  connect_bd_intf_net -intf_net axi_mem_intercon_M11_AXI [get_bd_intf_pins axi_apb_bridge_1/AXI4_LITE] [get_bd_intf_pins axi_mem_intercon/M11_AXI]
   connect_bd_intf_net -intf_net axi_quad_spi_0_SPI_0 [get_bd_intf_ports cfg_flash] [get_bd_intf_pins axi_cfg_spi_0/SPI_0]
   connect_bd_intf_net -intf_net axi_quad_spi_1_SPI_0 [get_bd_intf_ports spi_flash] [get_bd_intf_pins axi_quad_spi_1/SPI_0]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_bram_ctrl_0/S_AXI] [get_bd_intf_pins axi_mem_intercon/M00_AXI]
@@ -603,6 +621,7 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets axi_smc_M00_AXI]
   connect_bd_intf_net -intf_net mycpu_top_0_interface_aximm [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins mycpu_top_0/interface_aximm]
 connect_bd_intf_net -intf_net [get_bd_intf_nets mycpu_top_0_interface_aximm] [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins system_ila_0/SLOT_0_AXI]
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_aximm]
+  connect_bd_intf_net -intf_net nt35510_apb_adapter_0_LCD_data [get_bd_intf_ports LCD_data_0] [get_bd_intf_pins nt35510_apb_adapter_0/LCD_data]
   connect_bd_intf_net -intf_net usbh_host_0_utmi_data [get_bd_intf_ports utmi_data_0] [get_bd_intf_pins usbh_host_0/utmi_data]
 
   # Create port connections
@@ -629,10 +648,15 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wen]
   connect_bd_net -net debug_wb_rf_wnum [get_bd_pins mycpu_top_0/debug_wb_rf_wnum] [get_bd_pins system_ila_0/probe2]
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wnum]
   connect_bd_net -net mig_7series_0_mmcm_locked [get_bd_pins mig_7series_0/mmcm_locked] [get_bd_pins rst_mig_7series_0_cpu/dcm_locked]
-  connect_bd_net -net mig_7series_0_ui_addn_clk_0 [get_bd_pins altera_up_ps2_0/clk] [get_bd_pins axi_apb_bridge_0/s_axi_aclk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_cfg_spi_0/s_axi4_aclk] [get_bd_pins axi_cfg_spi_0/s_axi_aclk] [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/M01_ACLK] [get_bd_pins axi_mem_intercon/M03_ACLK] [get_bd_pins axi_mem_intercon/M04_ACLK] [get_bd_pins axi_mem_intercon/M05_ACLK] [get_bd_pins axi_mem_intercon/M06_ACLK] [get_bd_pins axi_mem_intercon/M07_ACLK] [get_bd_pins axi_mem_intercon/M09_ACLK] [get_bd_pins axi_mem_intercon/M10_ACLK] [get_bd_pins axi_mem_intercon/M11_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_quad_spi_1/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins confreg_0/s00_axi_aclk] [get_bd_pins mig_7series_0/ui_addn_clk_0] [get_bd_pins mycpu_top_0/aclk] [get_bd_pins rst_mig_7series_0_cpu/slowest_sync_clk] [get_bd_pins system_ila_0/clk]
+  connect_bd_net -net mig_7series_0_ui_addn_clk_0 [get_bd_pins altera_up_ps2_0/clk] [get_bd_pins axi_apb_bridge_0/s_axi_aclk] [get_bd_pins axi_apb_bridge_1/s_axi_aclk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_cfg_spi_0/s_axi4_aclk] [get_bd_pins axi_cfg_spi_0/s_axi_aclk] [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/M01_ACLK] [get_bd_pins axi_mem_intercon/M03_ACLK] [get_bd_pins axi_mem_intercon/M04_ACLK] [get_bd_pins axi_mem_intercon/M05_ACLK] [get_bd_pins axi_mem_intercon/M06_ACLK] [get_bd_pins axi_mem_intercon/M07_ACLK] [get_bd_pins axi_mem_intercon/M09_ACLK] [get_bd_pins axi_mem_intercon/M10_ACLK] [get_bd_pins axi_mem_intercon/M11_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_quad_spi_1/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins confreg_0/s00_axi_aclk] [get_bd_pins mig_7series_0/ui_addn_clk_0] [get_bd_pins mycpu_top_0/aclk] [get_bd_pins nt35510_apb_adapter_0/clk] [get_bd_pins rst_mig_7series_0_cpu/slowest_sync_clk] [get_bd_pins system_ila_0/clk]
   connect_bd_net -net mig_7series_0_ui_clk [get_bd_pins axi_mem_intercon/M02_ACLK] [get_bd_pins mig_7series_0/ui_clk]
+  connect_bd_net -net nt35510_apb_adapter_0_LCD_csel [get_bd_ports LCD_csel_0] [get_bd_pins nt35510_apb_adapter_0/LCD_csel]
+  connect_bd_net -net nt35510_apb_adapter_0_LCD_nrst [get_bd_ports LCD_nrst_0] [get_bd_pins nt35510_apb_adapter_0/LCD_nrst]
+  connect_bd_net -net nt35510_apb_adapter_0_LCD_rd [get_bd_ports LCD_rd_0] [get_bd_pins nt35510_apb_adapter_0/LCD_rd]
+  connect_bd_net -net nt35510_apb_adapter_0_LCD_rs [get_bd_ports LCD_rs_0] [get_bd_pins nt35510_apb_adapter_0/LCD_rs]
+  connect_bd_net -net nt35510_apb_adapter_0_LCD_wr [get_bd_ports LCD_wr_0] [get_bd_pins nt35510_apb_adapter_0/LCD_wr]
   connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins util_vector_logic_1/Op1]
-  connect_bd_net -net rst_mig_7series_0_100M_peripheral_aresetn [get_bd_pins altera_up_ps2_0/reset_n] [get_bd_pins axi_apb_bridge_0/s_axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn] [get_bd_pins axi_cfg_spi_0/s_axi4_aresetn] [get_bd_pins axi_cfg_spi_0/s_axi_aresetn] [get_bd_pins axi_ethernetlite_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/M01_ARESETN] [get_bd_pins axi_mem_intercon/M02_ARESETN] [get_bd_pins axi_mem_intercon/M03_ARESETN] [get_bd_pins axi_mem_intercon/M04_ARESETN] [get_bd_pins axi_mem_intercon/M05_ARESETN] [get_bd_pins axi_mem_intercon/M06_ARESETN] [get_bd_pins axi_mem_intercon/M07_ARESETN] [get_bd_pins axi_mem_intercon/M09_ARESETN] [get_bd_pins axi_mem_intercon/M10_ARESETN] [get_bd_pins axi_mem_intercon/M11_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_quad_spi_1/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins confreg_0/s00_axi_aresetn] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_mig_7series_0_cpu/peripheral_aresetn] [get_bd_pins rst_utmi_clock_0_60M/ext_reset_in] [get_bd_pins system_ila_0/resetn]
+  connect_bd_net -net rst_mig_7series_0_100M_peripheral_aresetn [get_bd_pins altera_up_ps2_0/reset_n] [get_bd_pins axi_apb_bridge_0/s_axi_aresetn] [get_bd_pins axi_apb_bridge_1/s_axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn] [get_bd_pins axi_cfg_spi_0/s_axi4_aresetn] [get_bd_pins axi_cfg_spi_0/s_axi_aresetn] [get_bd_pins axi_ethernetlite_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/M01_ARESETN] [get_bd_pins axi_mem_intercon/M02_ARESETN] [get_bd_pins axi_mem_intercon/M03_ARESETN] [get_bd_pins axi_mem_intercon/M04_ARESETN] [get_bd_pins axi_mem_intercon/M05_ARESETN] [get_bd_pins axi_mem_intercon/M06_ARESETN] [get_bd_pins axi_mem_intercon/M07_ARESETN] [get_bd_pins axi_mem_intercon/M09_ARESETN] [get_bd_pins axi_mem_intercon/M10_ARESETN] [get_bd_pins axi_mem_intercon/M11_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_quad_spi_1/s_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins confreg_0/s00_axi_aresetn] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins nt35510_apb_adapter_0/nrst] [get_bd_pins rst_mig_7series_0_cpu/peripheral_aresetn] [get_bd_pins rst_utmi_clock_0_60M/ext_reset_in] [get_bd_pins system_ila_0/resetn]
   connect_bd_net -net rst_mig_7series_0_cpu_mb_reset [get_bd_pins rst_mig_7series_0_cpu/mb_reset] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net rst_utmi_clock_0_60M_peripheral_aresetn [get_bd_pins axi_mem_intercon/M08_ARESETN] [get_bd_pins rst_utmi_clock_0_60M/peripheral_aresetn] [get_bd_pins usbh_host_0/aresetn]
   connect_bd_net -net usbh_host_0_intr [get_bd_pins usbh_host_0/intr] [get_bd_pins xlconcat_0/In4]
@@ -673,6 +697,7 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wnum]
   create_bd_addr_seg -range 0x00010000 -offset 0x1FD00000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs axi_uartlite_0/S_AXI/Reg] SEG_axi_uartlite_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x1F700000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs confreg_0/S00_AXI/S00_AXI_reg] SEG_confreg_0_S00_AXI_reg
   create_bd_addr_seg -range 0x08000000 -offset 0x00000000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs mig_7series_0/memmap/memaddr] SEG_mig_7series_0_memaddr
+  create_bd_addr_seg -range 0x00010000 -offset 0x1F600000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs nt35510_apb_adapter_0/APB/Ctrl] SEG_nt35510_apb_adapter_0_Ctrl
   create_bd_addr_seg -range 0x00010000 -offset 0x1E000000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs usbh_host_0/cfg/reg0] SEG_usbh_host_0_reg0
 
 
