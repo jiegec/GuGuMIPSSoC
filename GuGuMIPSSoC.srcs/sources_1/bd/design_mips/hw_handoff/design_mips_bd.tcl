@@ -403,7 +403,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi_quad_spi_1, and set properties
   set axi_quad_spi_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_quad_spi:3.2 axi_quad_spi_1 ]
   set_property -dict [ list \
-   CONFIG.C_FIFO_DEPTH {16} \
+   CONFIG.C_FIFO_DEPTH {256} \
    CONFIG.C_SCK_RATIO {2} \
    CONFIG.C_SPI_MEMORY {2} \
    CONFIG.C_SPI_MEM_ADDR_BITS {24} \
@@ -454,14 +454,14 @@ proc create_root_design { parentCell } {
    CONFIG.CLKOUT2_PHASE_ERROR {98.575} \
    CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {200.000} \
    CONFIG.CLKOUT2_USED {true} \
-   CONFIG.CLKOUT3_JITTER {151.636} \
+   CONFIG.CLKOUT3_JITTER {183.243} \
    CONFIG.CLKOUT3_PHASE_ERROR {98.575} \
-   CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {50.000} \
+   CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {20.000} \
    CONFIG.CLKOUT3_USED {true} \
    CONFIG.MMCM_CLKFBOUT_MULT_F {10.000} \
    CONFIG.MMCM_CLKOUT0_DIVIDE_F {10.000} \
    CONFIG.MMCM_CLKOUT1_DIVIDE {5} \
-   CONFIG.MMCM_CLKOUT2_DIVIDE {20} \
+   CONFIG.MMCM_CLKOUT2_DIVIDE {50} \
    CONFIG.MMCM_DIVCLK_DIVIDE {1} \
    CONFIG.NUM_OUT_CLKS {3} \
    CONFIG.RESET_PORT {resetn} \

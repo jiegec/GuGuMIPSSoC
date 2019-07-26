@@ -60,82 +60,82 @@ preplace inst usbh_host_0 -pg 1 -lvl 8 -y 1830 -defaultsOSRD
 preplace inst mycpu_top_0 -pg 1 -lvl 5 -y 130 -defaultsOSRD
 preplace inst axi_mem_intercon -pg 1 -lvl 6 -y 540 -defaultsOSRD
 preplace inst axi_bram_ctrl_0 -pg 1 -lvl 7 -y 300 -defaultsOSRD
-preplace netloc debug_wb_rf_wnum 1 5 2 1590 150 2190J
+preplace netloc debug_wb_rf_wnum 1 5 2 N 160 NJ
 preplace netloc rst_mig_7series_0_cpu_mb_reset 1 3 1 NJ
-preplace netloc axi_quad_spi_0_ip2intc_irpt 1 5 4 1680 1380 NJ 1380 2670J 1130 3060
+preplace netloc axi_quad_spi_0_ip2intc_irpt 1 5 4 1600 150 2200J 380 2540J 220 3070
 preplace netloc mig_7series_0_DDR3 1 8 1 NJ
-preplace netloc axi_mem_intercon_M01_AXI 1 6 2 2060 1350 NJ
-preplace netloc clk_in1_0_1 1 0 7 20 880 NJ 880 NJ 880 NJ 880 NJ 880 NJ 880 2130J
-preplace netloc util_vector_logic_0_Res 1 4 1 1220
-preplace netloc axi_quad_spi_0_SPI_0 1 8 1 3050J
-preplace netloc axi_smc_M00_AXI 1 6 1 2060
-preplace netloc axi_quad_spi_1_ip2intc_irpt 1 5 4 1700 1640 NJ 1640 NJ 1640 3040
-preplace netloc axi_mem_intercon_M04_AXI 1 6 2 2110 750 2630J
-preplace netloc utmi_vbusvalid_0_1 1 0 8 NJ 1880 NJ 1880 NJ 1880 NJ 1880 NJ 1880 NJ 1880 NJ 1880 2550J
-preplace netloc vio_0_probe_out0 1 1 1 240J
-preplace netloc utmi_hostdisc_0_1 1 0 8 NJ 1840 NJ 1840 NJ 1840 NJ 1840 NJ 1840 NJ 1840 NJ 1840 2570J
-preplace netloc usbh_host_0_utmi_reset 1 8 1 3060J
-preplace netloc axi_mem_intercon_M08_AXI 1 6 2 2040 1340 2640J
-preplace netloc axi_ethernetlite_0_ip2intc_irpt 1 5 4 1660 190 2180J 380 2580J 220 3050
-preplace netloc utmi_linestate_0_1 1 0 8 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 2580J
-preplace netloc xlconcat_0_dout 1 6 1 2120
-preplace netloc usbh_host_0_utmi_xcvrsel 1 8 1 3090J
-preplace netloc usbh_host_0_utmi_termsel 1 8 1 3100J
-preplace netloc mig_7series_0_mmcm_locked 1 2 7 550 240 NJ 240 NJ 240 1610J 170 2190J 390 2570J 210 3060
-preplace netloc utmi_txready_0_1 1 0 8 NJ 1740 NJ 1740 NJ 1740 NJ 1740 NJ 1740 NJ 1740 NJ 1740 2620J
+preplace netloc axi_mem_intercon_M01_AXI 1 6 2 2040 1350 NJ
+preplace netloc clk_in1_0_1 1 0 7 -20 20 NJ 20 NJ 20 NJ 20 NJ 20 NJ 20 2170J
+preplace netloc util_vector_logic_0_Res 1 4 1 1180
+preplace netloc axi_quad_spi_0_SPI_0 1 8 1 3100J
+preplace netloc axi_smc_M00_AXI 1 6 1 2120
+preplace netloc axi_quad_spi_1_ip2intc_irpt 1 5 4 1640 1450 NJ 1450 NJ 1450 3030
+preplace netloc axi_mem_intercon_M04_AXI 1 6 2 2130 580 2660J
+preplace netloc utmi_vbusvalid_0_1 1 0 8 NJ 1880 NJ 1880 NJ 1880 NJ 1880 NJ 1880 NJ 1880 NJ 1880 2500J
+preplace netloc vio_0_probe_out0 1 1 1 200J
+preplace netloc utmi_hostdisc_0_1 1 0 8 NJ 1840 NJ 1840 NJ 1840 NJ 1840 NJ 1840 NJ 1840 NJ 1840 2520J
+preplace netloc usbh_host_0_utmi_reset 1 8 1 3110J
+preplace netloc axi_mem_intercon_M08_AXI 1 6 2 2010 1360 2590J
+preplace netloc axi_ethernetlite_0_ip2intc_irpt 1 5 4 1630 1000 2000J 1330 2610J 880 3050
+preplace netloc utmi_linestate_0_1 1 0 8 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 2530J
+preplace netloc xlconcat_0_dout 1 6 1 2110
+preplace netloc usbh_host_0_utmi_xcvrsel 1 8 1 3140J
+preplace netloc usbh_host_0_utmi_termsel 1 8 1 3150J
+preplace netloc mig_7series_0_mmcm_locked 1 2 7 510 30 NJ 30 NJ 30 NJ 30 2070J 1380 2650J 1130 3040
+preplace netloc utmi_txready_0_1 1 0 8 NJ 1740 NJ 1740 NJ 1740 NJ 1740 NJ 1740 NJ 1740 NJ 1740 2570J
 preplace netloc confreg_0_led 1 8 1 NJ
-preplace netloc usbh_host_0_utmi_idpullup 1 8 1 3130J
-preplace netloc axi_mem_intercon_M10_AXI 1 6 2 2020 1520 NJ
-preplace netloc rst_mig_7series_0_100M_peripheral_aresetn 1 3 5 NJ 520 1210 710 1650 180 2150 950 2700
-preplace netloc utmi_rxerror_0_1 1 0 8 NJ 1800 NJ 1800 NJ 1800 NJ 1800 NJ 1800 NJ 1800 NJ 1800 2590J
-preplace netloc axi_mem_intercon_M06_AXI 1 6 2 2050J 960 N
-preplace netloc usbh_host_0_intr 1 5 4 1670 1650 NJ 1650 NJ 1650 3040
+preplace netloc usbh_host_0_utmi_idpullup 1 8 1 3180J
+preplace netloc axi_mem_intercon_M10_AXI 1 6 2 2030 1320 2630J
+preplace netloc rst_mig_7series_0_100M_peripheral_aresetn 1 3 5 NJ 520 1200 500 1590 180 2150 950 2680
+preplace netloc utmi_rxerror_0_1 1 0 8 NJ 1800 NJ 1800 NJ 1800 NJ 1800 NJ 1800 NJ 1800 NJ 1800 2540J
+preplace netloc axi_mem_intercon_M06_AXI 1 6 2 2060J 960 N
+preplace netloc usbh_host_0_intr 1 5 4 1620 200 2160J 400 2550J 210 3090
 preplace netloc altera_up_ps2_0_ps2_clk 1 8 1 NJ
 preplace netloc debug_wb_pc 1 5 2 N 120 NJ
-preplace netloc mig_7series_0_ui_addn_clk_0 1 2 7 540 230 NJ 230 1210 230 1630 130 2160 970 2690 850 3040
-preplace netloc axi_mem_intercon_M09_AXI 1 6 2 2100 580 2620J
-preplace netloc usbh_host_0_utmi_suspend_n 1 8 1 3160J
-preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 7 1 2590
+preplace netloc mig_7series_0_ui_addn_clk_0 1 2 7 520 110 NJ 110 1180 40 1580 100 2140 970 2670 850 3030
+preplace netloc axi_mem_intercon_M09_AXI 1 6 2 2080 750 2580J
+preplace netloc usbh_host_0_utmi_suspend_n 1 8 1 3210J
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 7 1 2560
 preplace netloc axi_uartlite_0_UART 1 8 1 NJ
-preplace netloc axi_mem_intercon_M07_AXI 1 6 1 2090
+preplace netloc axi_mem_intercon_M07_AXI 1 6 1 2100
 preplace netloc resetn_1 1 0 2 NJ 450 NJ
-preplace netloc usbh_host_0_utmi_dmpulldown 1 8 1 3120J
-preplace netloc axi_quad_spi_1_SPI_0 1 8 1 3050J
-preplace netloc axi_apb_bridge_0_APB_M 1 7 1 2680
+preplace netloc usbh_host_0_utmi_dmpulldown 1 8 1 3170J
+preplace netloc axi_quad_spi_1_SPI_0 1 8 1 3100J
+preplace netloc axi_apb_bridge_0_APB_M 1 7 1 2660
 preplace netloc axi_ethernetlite_0_MDIO 1 8 1 NJ
-preplace netloc axi_mem_intercon_M05_AXI 1 6 2 2080 940 NJ
+preplace netloc axi_mem_intercon_M05_AXI 1 6 2 2090 940 NJ
 preplace netloc axi_ethernetlite_0_MII 1 8 1 NJ
-preplace netloc rst_utmi_clock_0_60M_peripheral_aresetn 1 5 3 1600 1760 NJ 1760 NJ
-preplace netloc utmi_rxvalid_0_1 1 0 8 20J 1790 NJ 1790 NJ 1790 NJ 1790 NJ 1790 NJ 1790 NJ 1790 2600J
-preplace netloc aclk_0_1 1 0 8 NJ 380 NJ 380 NJ 380 NJ 380 1230 700 1590 1000 2030J 1360 2630J
-preplace netloc mycpu_top_0_interface_aximm 1 5 2 1620 60 NJ
-preplace netloc utmi_iddig_0_1 1 0 8 NJ 1860 NJ 1860 NJ 1860 NJ 1860 NJ 1860 NJ 1860 NJ 1860 2560J
-preplace netloc clk_wiz_0_locked 1 7 1 2650
-preplace netloc usbh_host_0_utmi_data 1 8 1 3050J
+preplace netloc rst_utmi_clock_0_60M_peripheral_aresetn 1 5 3 1560 1010 1990J 1340 2580J
+preplace netloc utmi_rxvalid_0_1 1 0 8 NJ 1760 NJ 1760 NJ 1760 NJ 1760 NJ 1760 NJ 1760 NJ 1760 2560J
+preplace netloc aclk_0_1 1 0 8 NJ 380 NJ 380 NJ 380 NJ 380 1190 490 1570 880 2020J 980 2600J
+preplace netloc mycpu_top_0_interface_aximm 1 5 2 1560 60 NJ
+preplace netloc utmi_iddig_0_1 1 0 8 NJ 1860 NJ 1860 NJ 1860 NJ 1860 NJ 1860 NJ 1860 NJ 1860 2510J
+preplace netloc clk_wiz_0_locked 1 7 1 2610
+preplace netloc usbh_host_0_utmi_data 1 8 1 3100J
 preplace netloc debug_wb_rf_wen 1 5 2 N 140 NJ
 preplace netloc util_vector_logic_1_Res 1 2 1 N
-preplace netloc altera_up_ps2_0_irq 1 5 4 1670 1010 2010J 1370 2650J 1120 3040
-preplace netloc mig_7series_0_ui_clk 1 5 4 1690 200 2170J 400 2610J 230 3040
-preplace netloc axi_uartlite_0_interrupt 1 5 4 1690 1390 NJ 1390 2680J 1290 3040
-preplace netloc axi_mem_intercon_M02_AXI 1 6 2 2130 740 2640J
-preplace netloc axi_intc_0_irq 1 4 4 1230 220 1600J 160 2140J 930 2590
-preplace netloc clk_wiz_0_clk_out1 1 7 1 2670
-preplace netloc clk_wiz_0_clk_out2 1 7 1 2660
-preplace netloc utmi_sessend_0_1 1 0 8 NJ 1900 NJ 1900 NJ 1900 NJ 1900 NJ 1900 NJ 1900 NJ 1900 2540J
-preplace netloc axi_mem_intercon_M03_AXI 1 6 1 2120
-preplace netloc clk_wiz_0_clk_out3 1 7 1 2660
-preplace netloc usbh_host_0_utmi_opmode 1 8 1 3080J
-preplace netloc xlconstant_0_dout 1 6 1 2070J
-preplace netloc utmi_rxactive_0_1 1 0 8 NJ 1780 NJ 1780 NJ 1780 NJ 1780 NJ 1780 NJ 1780 NJ 1780 2610J
-preplace netloc ARESETN_1 1 3 3 910J 370 NJ 370 1640
-preplace netloc usbh_host_0_utmi_dischrgvbus 1 8 1 3150J
-preplace netloc usbh_host_0_utmi_chrgvbus 1 8 1 3140J
+preplace netloc altera_up_ps2_0_irq 1 5 4 1630 1390 NJ 1390 2660J 1290 3030
+preplace netloc mig_7series_0_ui_clk 1 5 4 1630 190 2050J 1370 2620J 1120 3060
+preplace netloc axi_uartlite_0_interrupt 1 5 4 1610 170 2190J 390 2570J 230 3080
+preplace netloc axi_mem_intercon_M02_AXI 1 6 2 2120 740 2600J
+preplace netloc axi_intc_0_irq 1 4 4 1190 10 NJ 10 2180J 930 2560
+preplace netloc clk_wiz_0_clk_out1 1 7 1 2640
+preplace netloc clk_wiz_0_clk_out2 1 7 1 2620
+preplace netloc utmi_sessend_0_1 1 0 8 NJ 1900 NJ 1900 NJ 1900 NJ 1900 NJ 1900 NJ 1900 NJ 1900 2490J
+preplace netloc axi_mem_intercon_M03_AXI 1 6 1 2110
+preplace netloc clk_wiz_0_clk_out3 1 7 1 2640
+preplace netloc usbh_host_0_utmi_opmode 1 8 1 3130J
+preplace netloc xlconstant_0_dout 1 6 1 2080J
+preplace netloc utmi_rxactive_0_1 1 0 8 NJ 1780 NJ 1780 NJ 1780 NJ 1780 NJ 1780 NJ 1780 NJ 1780 2550J
+preplace netloc ARESETN_1 1 3 3 880J 370 NJ 370 1560
+preplace netloc usbh_host_0_utmi_dischrgvbus 1 8 1 3200J
+preplace netloc usbh_host_0_utmi_chrgvbus 1 8 1 3190J
 preplace netloc confreg_0_led_rg0 1 8 1 NJ
-preplace netloc usbh_host_0_utmi_dppulldown 1 8 1 3110J
-preplace netloc usbh_host_0_utmi_txvalid 1 8 1 3070J
+preplace netloc usbh_host_0_utmi_dppulldown 1 8 1 3160J
+preplace netloc usbh_host_0_utmi_txvalid 1 8 1 3120J
 preplace netloc confreg_0_led_rg1 1 8 1 NJ
 preplace netloc altera_up_ps2_0_ps2_dat 1 8 1 NJ
-levelinfo -pg 1 0 130 390 730 1060 1410 1860 2400 2880 3230 -top 0 -bot 2010
+levelinfo -pg 1 -40 90 357 700 1030 1380 1840 2350 2867 3230 -top 0 -bot 2330
 "
 }
 {
