@@ -323,6 +323,7 @@ proc create_root_design { parentCell } {
 
   # Create ports
   set LCD_csel_0 [ create_bd_port -dir O LCD_csel_0 ]
+  set LCD_lighton_0 [ create_bd_port -dir O -from 0 -to 0 LCD_lighton_0 ]
   set LCD_nrst_0 [ create_bd_port -dir O LCD_nrst_0 ]
   set LCD_rd_0 [ create_bd_port -dir O LCD_rd_0 ]
   set LCD_rs_0 [ create_bd_port -dir O LCD_rs_0 ]
@@ -524,7 +525,7 @@ proc create_root_design { parentCell } {
   set system_ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0 ]
   set_property -dict [ list \
    CONFIG.C_MON_TYPE {MIX} \
-   CONFIG.C_NUM_MONITOR_SLOTS {2} \
+   CONFIG.C_NUM_MONITOR_SLOTS {1} \
    CONFIG.C_NUM_OF_PROBES {3} \
    CONFIG.C_PROBE0_TYPE {0} \
    CONFIG.C_PROBE1_TYPE {0} \
@@ -592,6 +593,9 @@ proc create_root_design { parentCell } {
    CONFIG.CONST_VAL {1} \
  ] $xlconstant_0
 
+  # Create instance: xlconstant_1, and set properties
+  set xlconstant_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1 ]
+
   # Create interface connections
   connect_bd_intf_net -intf_net altera_up_ps2_0_ps2_clk [get_bd_intf_ports ps2_clk] [get_bd_intf_pins altera_up_ps2_0/ps2_clk]
   connect_bd_intf_net -intf_net altera_up_ps2_0_ps2_dat [get_bd_intf_ports ps2_dat] [get_bd_intf_pins altera_up_ps2_0/ps2_dat]
@@ -614,8 +618,6 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_quad_spi_0_SPI_0 [get_bd_intf_ports cfg_flash] [get_bd_intf_pins axi_cfg_spi_0/SPI_0]
   connect_bd_intf_net -intf_net axi_quad_spi_1_SPI_0 [get_bd_intf_ports spi_flash] [get_bd_intf_pins axi_quad_spi_1/SPI_0]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_bram_ctrl_0/S_AXI] [get_bd_intf_pins axi_mem_intercon/M00_AXI]
-connect_bd_intf_net -intf_net [get_bd_intf_nets axi_smc_M00_AXI] [get_bd_intf_pins axi_mem_intercon/M00_AXI] [get_bd_intf_pins system_ila_0/SLOT_1_AXI]
-set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets axi_smc_M00_AXI]
   connect_bd_intf_net -intf_net axi_uartlite_0_UART [get_bd_intf_ports uart] [get_bd_intf_pins axi_uartlite_0/UART]
   connect_bd_intf_net -intf_net mig_7series_0_DDR3 [get_bd_intf_ports DDR3_0] [get_bd_intf_pins mig_7series_0/DDR3]
   connect_bd_intf_net -intf_net mycpu_top_0_interface_aximm [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins mycpu_top_0/interface_aximm]
@@ -685,6 +687,7 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets debug_wb_rf_wnum]
   connect_bd_net -net vio_0_probe_out0 [get_bd_pins util_vector_logic_1/Op2] [get_bd_pins vio_0/probe_out0]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc_0/intr] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins clk_wiz_0/resetn] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlconstant_1_dout [get_bd_ports LCD_lighton_0] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments
   create_bd_addr_seg -range 0x00010000 -offset 0x1F800000 [get_bd_addr_spaces mycpu_top_0/interface_aximm] [get_bd_addr_segs altera_up_ps2_0/APB/ctl] SEG_altera_up_ps2_0_ctl
