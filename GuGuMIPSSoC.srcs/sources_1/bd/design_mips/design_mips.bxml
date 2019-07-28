@@ -2,19 +2,11 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="design_mips" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1564159118"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1564159118"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1564159118"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1564159118"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1564333072"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1564333072"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1564333072"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1564333072"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
-      <File Name="ip/design_mips_mycpu_top_0_0/design_mips_mycpu_top_0_0.xci" Type="IP">
-        <Instance HierarchyPath="mycpu_top_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
       <File Name="ip/design_mips_clk_wiz_0_0/design_mips_clk_wiz_0_0.xci" Type="IP">
         <Instance HierarchyPath="clk_wiz_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
@@ -228,6 +220,14 @@
       </File>
       <File Name="ip/design_mips_xlconstant_1_0/design_mips_xlconstant_1_0.xci" Type="IP">
         <Instance HierarchyPath="xlconstant_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_mips_mycpu_top_0_1/design_mips_mycpu_top_0_1.xci" Type="IP">
+        <Instance HierarchyPath="mycpu_top_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
