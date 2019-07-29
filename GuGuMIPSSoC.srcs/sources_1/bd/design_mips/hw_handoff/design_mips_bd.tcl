@@ -524,9 +524,11 @@ proc create_root_design { parentCell } {
   # Create instance: system_ila_0, and set properties
   set system_ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0 ]
   set_property -dict [ list \
+   CONFIG.C_BRAM_CNT {24} \
+   CONFIG.C_DATA_DEPTH {4096} \
    CONFIG.C_MON_TYPE {MIX} \
    CONFIG.C_NUM_MONITOR_SLOTS {1} \
-   CONFIG.C_NUM_OF_PROBES {3} \
+   CONFIG.C_NUM_OF_PROBES {4} \
    CONFIG.C_PROBE0_TYPE {0} \
    CONFIG.C_PROBE1_TYPE {0} \
    CONFIG.C_PROBE2_TYPE {0} \
@@ -681,7 +683,8 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_
   connect_bd_net -net utmi_txready_0_1 [get_bd_ports utmi_txready_0] [get_bd_pins usbh_host_0/utmi_txready]
   connect_bd_net -net utmi_vbusvalid_0_1 [get_bd_ports utmi_vbusvalid_0] [get_bd_pins usbh_host_0/utmi_vbusvalid]
   connect_bd_net -net vio_0_probe_out0 [get_bd_pins util_vector_logic_1/Op2] [get_bd_pins vio_0/probe_out0]
-  connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc_0/intr] [get_bd_pins xlconcat_0/dout]
+  connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc_0/intr] [get_bd_pins system_ila_0/probe3] [get_bd_pins xlconcat_0/dout]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets xlconcat_0_dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins clk_wiz_0/resetn] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlconstant_1_dout [get_bd_ports LCD_lighton_0] [get_bd_pins xlconstant_1/dout]
 

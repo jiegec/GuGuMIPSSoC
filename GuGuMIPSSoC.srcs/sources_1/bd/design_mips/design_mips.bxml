@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="design_mips" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1564333072"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1564333072"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1564333072"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1564333072"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1564422859"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1564422859"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1564422859"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1564422859"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/design_mips_clk_wiz_0_0/design_mips_clk_wiz_0_0.xci" Type="IP">
         <Instance HierarchyPath="clk_wiz_0"/>
