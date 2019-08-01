@@ -524,11 +524,11 @@ proc create_root_design { parentCell } {
   # Create instance: system_ila_0, and set properties
   set system_ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0 ]
   set_property -dict [ list \
-   CONFIG.C_BRAM_CNT {24} \
-   CONFIG.C_DATA_DEPTH {4096} \
+   CONFIG.C_BRAM_CNT {48.5} \
+   CONFIG.C_DATA_DEPTH {8192} \
    CONFIG.C_MON_TYPE {MIX} \
    CONFIG.C_NUM_MONITOR_SLOTS {1} \
-   CONFIG.C_NUM_OF_PROBES {4} \
+   CONFIG.C_NUM_OF_PROBES {8} \
    CONFIG.C_PROBE0_TYPE {0} \
    CONFIG.C_PROBE1_TYPE {0} \
    CONFIG.C_PROBE2_TYPE {0} \
@@ -648,7 +648,11 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_
   connect_bd_net -net mig_7series_0_mmcm_locked [get_bd_pins mig_7series_0/mmcm_locked] [get_bd_pins rst_mig_7series_0_cpu/dcm_locked]
   connect_bd_net -net mig_7series_0_ui_addn_clk_0 [get_bd_pins altera_up_ps2_0/clk] [get_bd_pins axi_apb_bridge_0/s_axi_aclk] [get_bd_pins axi_apb_bridge_1/s_axi_aclk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_cfg_spi_0/s_axi4_aclk] [get_bd_pins axi_cfg_spi_0/s_axi_aclk] [get_bd_pins axi_ethernetlite_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/M01_ACLK] [get_bd_pins axi_mem_intercon/M03_ACLK] [get_bd_pins axi_mem_intercon/M04_ACLK] [get_bd_pins axi_mem_intercon/M05_ACLK] [get_bd_pins axi_mem_intercon/M06_ACLK] [get_bd_pins axi_mem_intercon/M07_ACLK] [get_bd_pins axi_mem_intercon/M09_ACLK] [get_bd_pins axi_mem_intercon/M10_ACLK] [get_bd_pins axi_mem_intercon/M11_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_quad_spi_1/s_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins confreg_0/s00_axi_aclk] [get_bd_pins mig_7series_0/ui_addn_clk_0] [get_bd_pins mycpu_top_0/aclk] [get_bd_pins nt35510_apb_adapter_0/clk] [get_bd_pins rst_mig_7series_0_cpu/slowest_sync_clk] [get_bd_pins system_ila_0/clk]
   connect_bd_net -net mig_7series_0_ui_clk [get_bd_pins axi_mem_intercon/M02_ACLK] [get_bd_pins mig_7series_0/ui_clk]
+  connect_bd_net -net mycpu_top_0_cp0_cause_o [get_bd_pins mycpu_top_0/cp0_cause_o] [get_bd_pins system_ila_0/probe5]
+  connect_bd_net -net mycpu_top_0_cp0_epc_o [get_bd_pins mycpu_top_0/cp0_epc_o] [get_bd_pins system_ila_0/probe6]
+  connect_bd_net -net mycpu_top_0_cp0_status_o [get_bd_pins mycpu_top_0/cp0_status_o] [get_bd_pins system_ila_0/probe4]
   connect_bd_net -net mycpu_top_0_debug_wb_pc [get_bd_pins mycpu_top_0/debug_wb_pc] [get_bd_pins system_ila_0/probe0]
+  connect_bd_net -net mycpu_top_0_debug_wb_rf_data [get_bd_pins mycpu_top_0/debug_wb_rf_data] [get_bd_pins system_ila_0/probe7]
   connect_bd_net -net mycpu_top_0_debug_wb_rf_wen [get_bd_pins mycpu_top_0/debug_wb_rf_wen] [get_bd_pins system_ila_0/probe1]
   connect_bd_net -net mycpu_top_0_debug_wb_rf_wnum [get_bd_pins mycpu_top_0/debug_wb_rf_wnum] [get_bd_pins system_ila_0/probe2]
   connect_bd_net -net nt35510_apb_adapter_0_LCD_csel [get_bd_ports LCD_csel_0] [get_bd_pins nt35510_apb_adapter_0/LCD_csel]
