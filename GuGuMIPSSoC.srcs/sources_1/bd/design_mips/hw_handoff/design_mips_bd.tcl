@@ -528,7 +528,7 @@ proc create_root_design { parentCell } {
    CONFIG.C_DATA_DEPTH {8192} \
    CONFIG.C_MON_TYPE {MIX} \
    CONFIG.C_NUM_MONITOR_SLOTS {1} \
-   CONFIG.C_NUM_OF_PROBES {8} \
+   CONFIG.C_NUM_OF_PROBES {7} \
    CONFIG.C_PROBE0_TYPE {0} \
    CONFIG.C_PROBE1_TYPE {0} \
    CONFIG.C_PROBE2_TYPE {0} \
@@ -557,6 +557,35 @@ proc create_root_design { parentCell } {
    CONFIG.C_SLOT_1_AXI_W_SEL_TRIG {1} \
    CONFIG.C_SLOT_1_INTF_TYPE {xilinx.com:interface:aximm_rtl:1.0} \
  ] $system_ila_0
+
+  # Create instance: system_ila_1, and set properties
+  set system_ila_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_1 ]
+  set_property -dict [ list \
+   CONFIG.C_MON_TYPE {MIX} \
+   CONFIG.C_NUM_MONITOR_SLOTS {1} \
+   CONFIG.C_NUM_OF_PROBES {19} \
+   CONFIG.C_PROBE0_TYPE {0} \
+   CONFIG.C_PROBE10_TYPE {0} \
+   CONFIG.C_PROBE11_TYPE {0} \
+   CONFIG.C_PROBE12_TYPE {0} \
+   CONFIG.C_PROBE13_TYPE {0} \
+   CONFIG.C_PROBE14_TYPE {0} \
+   CONFIG.C_PROBE15_TYPE {0} \
+   CONFIG.C_PROBE16_TYPE {0} \
+   CONFIG.C_PROBE17_TYPE {0} \
+   CONFIG.C_PROBE18_TYPE {0} \
+   CONFIG.C_PROBE1_TYPE {0} \
+   CONFIG.C_PROBE2_TYPE {0} \
+   CONFIG.C_PROBE3_TYPE {0} \
+   CONFIG.C_PROBE4_TYPE {0} \
+   CONFIG.C_PROBE5_TYPE {0} \
+   CONFIG.C_PROBE6_TYPE {0} \
+   CONFIG.C_PROBE7_TYPE {0} \
+   CONFIG.C_PROBE8_TYPE {0} \
+   CONFIG.C_PROBE9_TYPE {0} \
+   CONFIG.C_SLOT_0_INTF_TYPE {xilinx.com:interface:gpio_rtl:1.0} \
+   CONFIG.C_SLOT_0_TYPE {0} \
+ ] $system_ila_1
 
   # Create instance: usbh_host_0, and set properties
   set usbh_host_0 [ create_bd_cell -type ip -vlnv user.org:user:usbh_host:1.3 usbh_host_0 ]
@@ -627,10 +656,12 @@ connect_bd_intf_net -intf_net [get_bd_intf_nets mycpu_top_0_interface_aximm] [ge
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_aximm]
   connect_bd_intf_net -intf_net nt35510_apb_adapter_0_LCD_data [get_bd_intf_ports LCD_data_0] [get_bd_intf_pins nt35510_apb_adapter_0/LCD_data]
   connect_bd_intf_net -intf_net usbh_host_0_utmi_data [get_bd_intf_ports utmi_data_0] [get_bd_intf_pins usbh_host_0/utmi_data]
+connect_bd_intf_net -intf_net [get_bd_intf_nets usbh_host_0_utmi_data] [get_bd_intf_ports utmi_data_0] [get_bd_intf_pins system_ila_1/SLOT_0_GPIO]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets usbh_host_0_utmi_data]
 
   # Create port connections
   connect_bd_net -net ARESETN_1 [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins mycpu_top_0/aresetn] [get_bd_pins rst_mig_7series_0_cpu/interconnect_aresetn]
-  connect_bd_net -net aclk_0_1 [get_bd_ports utmi_clock_0] [get_bd_pins axi_mem_intercon/M08_ACLK] [get_bd_pins rst_utmi_clock_0_60M/slowest_sync_clk] [get_bd_pins usbh_host_0/aclk]
+  connect_bd_net -net aclk_0_1 [get_bd_ports utmi_clock_0] [get_bd_pins axi_mem_intercon/M08_ACLK] [get_bd_pins rst_utmi_clock_0_60M/slowest_sync_clk] [get_bd_pins system_ila_1/clk] [get_bd_pins usbh_host_0/aclk]
   connect_bd_net -net altera_up_ps2_0_irq [get_bd_pins altera_up_ps2_0/irq] [get_bd_pins xlconcat_0/In3]
   connect_bd_net -net axi_ethernetlite_0_ip2intc_irpt [get_bd_pins axi_ethernetlite_0/ip2intc_irpt] [get_bd_pins xlconcat_0/In2]
   connect_bd_net -net axi_intc_0_irq [get_bd_pins axi_intc_0/irq] [get_bd_pins mycpu_top_0/int]
@@ -652,7 +683,7 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_
   connect_bd_net -net mycpu_top_0_cp0_epc_o [get_bd_pins mycpu_top_0/cp0_epc_o] [get_bd_pins system_ila_0/probe6]
   connect_bd_net -net mycpu_top_0_cp0_status_o [get_bd_pins mycpu_top_0/cp0_status_o] [get_bd_pins system_ila_0/probe4]
   connect_bd_net -net mycpu_top_0_debug_wb_pc [get_bd_pins mycpu_top_0/debug_wb_pc] [get_bd_pins system_ila_0/probe0]
-  connect_bd_net -net mycpu_top_0_debug_wb_rf_data [get_bd_pins mycpu_top_0/debug_wb_rf_data] [get_bd_pins system_ila_0/probe7]
+  connect_bd_net -net mycpu_top_0_debug_wb_rf_data [get_bd_pins mycpu_top_0/debug_wb_rf_data] [get_bd_pins system_ila_0/probe3]
   connect_bd_net -net mycpu_top_0_debug_wb_rf_wen [get_bd_pins mycpu_top_0/debug_wb_rf_wen] [get_bd_pins system_ila_0/probe1]
   connect_bd_net -net mycpu_top_0_debug_wb_rf_wnum [get_bd_pins mycpu_top_0/debug_wb_rf_wnum] [get_bd_pins system_ila_0/probe2]
   connect_bd_net -net nt35510_apb_adapter_0_LCD_csel [get_bd_ports LCD_csel_0] [get_bd_pins nt35510_apb_adapter_0/LCD_csel]
@@ -665,30 +696,48 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets mycpu_top_0_interface_
   connect_bd_net -net rst_mig_7series_0_cpu_mb_reset [get_bd_pins rst_mig_7series_0_cpu/mb_reset] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net rst_utmi_clock_0_60M_peripheral_aresetn [get_bd_pins axi_mem_intercon/M08_ARESETN] [get_bd_pins rst_utmi_clock_0_60M/peripheral_aresetn] [get_bd_pins usbh_host_0/aresetn]
   connect_bd_net -net usbh_host_0_intr [get_bd_pins usbh_host_0/intr] [get_bd_pins xlconcat_0/In4]
-  connect_bd_net -net usbh_host_0_utmi_chrgvbus [get_bd_ports utmi_chrgvbus_0] [get_bd_pins usbh_host_0/utmi_chrgvbus]
-  connect_bd_net -net usbh_host_0_utmi_dischrgvbus [get_bd_ports utmi_dischrgvbus_0] [get_bd_pins usbh_host_0/utmi_dischrgvbus]
-  connect_bd_net -net usbh_host_0_utmi_dmpulldown [get_bd_ports utmi_dmpulldown_0] [get_bd_pins usbh_host_0/utmi_dmpulldown]
-  connect_bd_net -net usbh_host_0_utmi_dppulldown [get_bd_ports utmi_dppulldown_0] [get_bd_pins usbh_host_0/utmi_dppulldown]
-  connect_bd_net -net usbh_host_0_utmi_idpullup [get_bd_ports utmi_idpullup_0] [get_bd_pins usbh_host_0/utmi_idpullup]
-  connect_bd_net -net usbh_host_0_utmi_opmode [get_bd_ports utmi_opmode_0] [get_bd_pins usbh_host_0/utmi_opmode]
+  connect_bd_net -net usbh_host_0_utmi_chrgvbus [get_bd_ports utmi_chrgvbus_0] [get_bd_pins system_ila_1/probe7] [get_bd_pins usbh_host_0/utmi_chrgvbus]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_chrgvbus]
+  connect_bd_net -net usbh_host_0_utmi_dischrgvbus [get_bd_ports utmi_dischrgvbus_0] [get_bd_pins system_ila_1/probe8] [get_bd_pins usbh_host_0/utmi_dischrgvbus]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_dischrgvbus]
+  connect_bd_net -net usbh_host_0_utmi_dmpulldown [get_bd_ports utmi_dmpulldown_0] [get_bd_pins system_ila_1/probe5] [get_bd_pins usbh_host_0/utmi_dmpulldown]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_dmpulldown]
+  connect_bd_net -net usbh_host_0_utmi_dppulldown [get_bd_ports utmi_dppulldown_0] [get_bd_pins system_ila_1/probe2] [get_bd_pins usbh_host_0/utmi_dppulldown]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_dppulldown]
+  connect_bd_net -net usbh_host_0_utmi_idpullup [get_bd_ports utmi_idpullup_0] [get_bd_pins system_ila_1/probe6] [get_bd_pins usbh_host_0/utmi_idpullup]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_idpullup]
+  connect_bd_net -net usbh_host_0_utmi_opmode [get_bd_ports utmi_opmode_0] [get_bd_pins system_ila_1/probe3] [get_bd_pins usbh_host_0/utmi_opmode]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_opmode]
   connect_bd_net -net usbh_host_0_utmi_reset [get_bd_ports utmi_reset_0] [get_bd_pins usbh_host_0/utmi_reset]
-  connect_bd_net -net usbh_host_0_utmi_suspend_n [get_bd_ports utmi_suspend_n_0] [get_bd_pins usbh_host_0/utmi_suspend_n]
-  connect_bd_net -net usbh_host_0_utmi_termsel [get_bd_ports utmi_termsel_0] [get_bd_pins usbh_host_0/utmi_termsel]
-  connect_bd_net -net usbh_host_0_utmi_txvalid [get_bd_ports utmi_txvalid_0] [get_bd_pins usbh_host_0/utmi_txvalid]
-  connect_bd_net -net usbh_host_0_utmi_xcvrsel [get_bd_ports utmi_xcvrsel_0] [get_bd_pins usbh_host_0/utmi_xcvrsel]
+  connect_bd_net -net usbh_host_0_utmi_suspend_n [get_bd_ports utmi_suspend_n_0] [get_bd_pins system_ila_1/probe9] [get_bd_pins usbh_host_0/utmi_suspend_n]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_suspend_n]
+  connect_bd_net -net usbh_host_0_utmi_termsel [get_bd_ports utmi_termsel_0] [get_bd_pins system_ila_1/probe1] [get_bd_pins usbh_host_0/utmi_termsel]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_termsel]
+  connect_bd_net -net usbh_host_0_utmi_txvalid [get_bd_ports utmi_txvalid_0] [get_bd_pins system_ila_1/probe0] [get_bd_pins usbh_host_0/utmi_txvalid]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_txvalid]
+  connect_bd_net -net usbh_host_0_utmi_xcvrsel [get_bd_ports utmi_xcvrsel_0] [get_bd_pins system_ila_1/probe4] [get_bd_pins usbh_host_0/utmi_xcvrsel]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets usbh_host_0_utmi_xcvrsel]
   connect_bd_net -net util_vector_logic_1_Res [get_bd_pins rst_mig_7series_0_cpu/ext_reset_in] [get_bd_pins util_vector_logic_1/Res]
-  connect_bd_net -net utmi_hostdisc_0_1 [get_bd_ports utmi_hostdisc_0] [get_bd_pins usbh_host_0/utmi_hostdisc]
-  connect_bd_net -net utmi_iddig_0_1 [get_bd_ports utmi_iddig_0] [get_bd_pins usbh_host_0/utmi_iddig]
-  connect_bd_net -net utmi_linestate_0_1 [get_bd_ports utmi_linestate_0] [get_bd_pins usbh_host_0/utmi_linestate]
-  connect_bd_net -net utmi_rxactive_0_1 [get_bd_ports utmi_rxactive_0] [get_bd_pins usbh_host_0/utmi_rxactive]
-  connect_bd_net -net utmi_rxerror_0_1 [get_bd_ports utmi_rxerror_0] [get_bd_pins usbh_host_0/utmi_rxerror]
-  connect_bd_net -net utmi_rxvalid_0_1 [get_bd_ports utmi_rxvalid_0] [get_bd_pins usbh_host_0/utmi_rxvalid]
-  connect_bd_net -net utmi_sessend_0_1 [get_bd_ports utmi_sessend_0] [get_bd_pins usbh_host_0/utmi_sessend]
-  connect_bd_net -net utmi_txready_0_1 [get_bd_ports utmi_txready_0] [get_bd_pins usbh_host_0/utmi_txready]
-  connect_bd_net -net utmi_vbusvalid_0_1 [get_bd_ports utmi_vbusvalid_0] [get_bd_pins usbh_host_0/utmi_vbusvalid]
+  connect_bd_net -net utmi_hostdisc_0_1 [get_bd_ports utmi_hostdisc_0] [get_bd_pins system_ila_1/probe13] [get_bd_pins usbh_host_0/utmi_hostdisc]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_hostdisc_0_1]
+  connect_bd_net -net utmi_iddig_0_1 [get_bd_ports utmi_iddig_0] [get_bd_pins system_ila_1/probe14] [get_bd_pins usbh_host_0/utmi_iddig]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_iddig_0_1]
+  connect_bd_net -net utmi_linestate_0_1 [get_bd_ports utmi_linestate_0] [get_bd_pins system_ila_1/probe11] [get_bd_pins usbh_host_0/utmi_linestate]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_linestate_0_1]
+  connect_bd_net -net utmi_rxactive_0_1 [get_bd_ports utmi_rxactive_0] [get_bd_pins system_ila_1/probe16] [get_bd_pins usbh_host_0/utmi_rxactive]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_rxactive_0_1]
+  connect_bd_net -net utmi_rxerror_0_1 [get_bd_ports utmi_rxerror_0] [get_bd_pins system_ila_1/probe17] [get_bd_pins usbh_host_0/utmi_rxerror]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_rxerror_0_1]
+  connect_bd_net -net utmi_rxvalid_0_1 [get_bd_ports utmi_rxvalid_0] [get_bd_pins system_ila_1/probe12] [get_bd_pins usbh_host_0/utmi_rxvalid]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_rxvalid_0_1]
+  connect_bd_net -net utmi_sessend_0_1 [get_bd_ports utmi_sessend_0] [get_bd_pins system_ila_1/probe18] [get_bd_pins usbh_host_0/utmi_sessend]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_sessend_0_1]
+  connect_bd_net -net utmi_txready_0_1 [get_bd_ports utmi_txready_0] [get_bd_pins system_ila_1/probe10] [get_bd_pins usbh_host_0/utmi_txready]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_txready_0_1]
+  connect_bd_net -net utmi_vbusvalid_0_1 [get_bd_ports utmi_vbusvalid_0] [get_bd_pins system_ila_1/probe15] [get_bd_pins usbh_host_0/utmi_vbusvalid]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets utmi_vbusvalid_0_1]
   connect_bd_net -net vio_0_probe_out0 [get_bd_pins util_vector_logic_1/Op2] [get_bd_pins vio_0/probe_out0]
-  connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc_0/intr] [get_bd_pins system_ila_0/probe3] [get_bd_pins xlconcat_0/dout]
-set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets xlconcat_0_dout]
+  connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc_0/intr] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins clk_wiz_0/resetn] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlconstant_1_dout [get_bd_ports LCD_lighton_0] [get_bd_pins xlconstant_1/dout]
 

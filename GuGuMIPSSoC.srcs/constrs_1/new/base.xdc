@@ -135,6 +135,7 @@ set_output_delay -clock clk_sck -max 3.050 [get_ports cfg_flash_io*_io]
 set_output_delay -clock clk_sck -min -2.950 [get_ports cfg_flash_io*_io]
 set_multicycle_path 2 -setup -start -from [get_clocks -of_objects [get_pins -hierarchical */ext_spi_clk]] -to clk_sck
 set_multicycle_path 1 -hold -from [get_clocks -of_objects [get_pins -hierarchical */ext_spi_clk]] -to clk_sck
+set_false_path -from [get_pins */U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/XIP_MODE_GEN.AXI_QSPI_XIP_I/RATIO_OF_2_GENERATE.SCK_O_NQ_4_STARTUP_USED.SCK_O_reg_reg/C] -to [get_pins */U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/XIP_MODE_GEN.SCK_MISO_STARTUP_USED.QSPI_STARTUP_BLOCK_I/STARTUP_7SERIES_GEN.STARTUP2_7SERIES_inst/USRCCLKO]
 
 # ps/2
 set_property -dict {PACKAGE_PIN AD1 IOSTANDARD LVCMOS33} [get_ports ps2_dat_tri_io]
